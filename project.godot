@@ -11,7 +11,11 @@ config_version=4
 [application]
 
 config/name="Magrajam4"
+<<<<<<< Updated upstream
 boot_splash/image="res://varliklar/cizimler/splashscreen.png"
+=======
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
+>>>>>>> Stashed changes
 config/icon="res://icon.png"
 
 [display]

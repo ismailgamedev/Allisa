@@ -1,7 +1,13 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/betikler/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=2]
+=======
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/MainMenu.gd" type="Script" id=1]
+>>>>>>> Stashed changes
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -11,6 +17,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+<<<<<<< Updated upstream
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,12 +43,20 @@ anchor_bottom = 1.0
 margin_left = 50.0
 margin_right = 330.0
 custom_constants/separation = 10
+=======
+[node name="BtnCont" type="VBoxContainer" parent="."]
+anchor_bottom = 1.0
+margin_left = 71.0
+margin_right = 454.0
+custom_constants/separation = 8
+>>>>>>> Stashed changes
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OynaBtn" type="Button" parent="BtnCont"]
+<<<<<<< Updated upstream
 margin_top = 159.0
 margin_right = 280.0
 margin_bottom = 222.0
@@ -89,4 +104,32 @@ visible = false
 [connection signal="pressed" from="BtnCont/OynaBtn" to="." method="_on_OynaBtn_pressed"]
 [connection signal="pressed" from="BtnCont/AyarlarBtn" to="." method="_on_AyarlarBtn_pressed"]
 [connection signal="pressed" from="BtnCont/HakkindaBtn" to="." method="_on_HakkindaBtn_pressed"]
+=======
+margin_top = 118.0
+margin_right = 383.0
+margin_bottom = 203.0
+rect_min_size = Vector2( 320, 85 )
+
+[node name="HakkindaBtn" type="Button" parent="BtnCont"]
+margin_top = 211.0
+margin_right = 383.0
+margin_bottom = 296.0
+rect_min_size = Vector2( 320, 85 )
+
+[node name="AyarlarBtn" type="Button" parent="BtnCont"]
+margin_top = 304.0
+margin_right = 383.0
+margin_bottom = 389.0
+rect_min_size = Vector2( 320, 85 )
+
+[node name="CikBtn" type="Button" parent="BtnCont"]
+margin_top = 397.0
+margin_right = 383.0
+margin_bottom = 482.0
+rect_min_size = Vector2( 320, 85 )
+
+[connection signal="pressed" from="BtnCont/OynaBtn" to="." method="_on_OynaBtn_pressed"]
+[connection signal="pressed" from="BtnCont/HakkindaBtn" to="." method="_on_HakkindaBtn_pressed"]
+[connection signal="pressed" from="BtnCont/AyarlarBtn" to="." method="_on_AyarlarBtn_pressed"]
+>>>>>>> Stashed changes
 [connection signal="pressed" from="BtnCont/CikBtn" to="." method="_on_CikBtn_pressed"]
