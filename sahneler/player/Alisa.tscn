@@ -1,8 +1,10 @@
+
 [gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://sahneler/player/Alisa.gd" type="Script" id=2]
 [ext_resource path="res://sahneler/player/hero_spritesheet.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 23.5 )
@@ -100,7 +102,9 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+
 visible = false
+
 position = Vector2( 0.5, -2.38419e-07 )
 scale = Vector2( 0.421875, 0.75 )
 texture = ExtResource( 1 )
@@ -122,3 +126,4 @@ position = Vector2( 0, -80 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
+
