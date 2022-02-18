@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/betikler/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=2]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OyunIsmiLb" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -512.0
+margin_right = 512.0
+margin_bottom = 159.0
+text = "The Flower"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnCont" type="VBoxContainer" parent="."]
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_right = 330.0
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OynaBtn" type="Button" parent="BtnCont"]
+margin_top = 159.0
+margin_right = 280.0
+margin_bottom = 222.0
+rect_min_size = Vector2( 256, 63 )
+text = "Oyna"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AyarlarBtn" type="Button" parent="BtnCont"]
+margin_top = 232.0
+margin_right = 280.0
+margin_bottom = 295.0
+rect_min_size = Vector2( 256, 63 )
+text = "Ayarlar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HakkindaBtn" type="Button" parent="BtnCont"]
+margin_top = 305.0
+margin_right = 280.0
+margin_bottom = 368.0
+rect_min_size = Vector2( 256, 63 )
+text = "Hakkinda"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CikBtn" type="Button" parent="BtnCont"]
+margin_top = 378.0
+margin_right = 280.0
+margin_bottom = 441.0
+rect_min_size = Vector2( 256, 63 )
+text = "Cik"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 2 )]
+visible = false
+
+[connection signal="pressed" from="BtnCont/OynaBtn" to="." method="_on_OynaBtn_pressed"]
+[connection signal="pressed" from="BtnCont/AyarlarBtn" to="." method="_on_AyarlarBtn_pressed"]
+[connection signal="pressed" from="BtnCont/HakkindaBtn" to="." method="_on_HakkindaBtn_pressed"]
+[connection signal="pressed" from="BtnCont/CikBtn" to="." method="_on_CikBtn_pressed"]
