@@ -19,23 +19,31 @@ func _hareket(carpan):
 
 		anim_player.play("walk")
 		$yurume.set_flip_h(false)
+		$ziplama.set_flip_h(false)
 		pass
 	if Input.is_action_pressed("hareket_sol"):
 		velocity.x -= speed
 
 		anim_player.play("walk")
 		$yurume.set_flip_h(true)
+		$ziplama.set_flip_h(true)
 		pass
 	if is_on_floor():
+		$ziplama.visible = false
 		if Input.is_action_just_pressed("ziplama"):
 			print("a")
 			velocity.y = -jump_speed
 			pass
 
-	if velocity.x == 0:
-		#anim_p.play("bekle")
-		anim_player.play("idle")
-
+		if velocity.x == 0:
+			#anim_p.play("bekle")
+			$ziplama.visible = false
+			$yurume.visible = true
+			anim_player.play("idle")
+	else:
+		$ziplama.visible = true
+		$yurume.visible = false
+		anim_player.play("jump")
 	velocity = move_and_slide(velocity,Vector2.UP)
 	pass
 

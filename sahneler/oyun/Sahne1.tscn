@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://sahneler/yagmur/Yagmur.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=2]
@@ -33,6 +33,7 @@ onready var _hugg = get_node(\"../hug\")
 var icerde = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	anim_p.play(\"CRY\")
 	_hugg.visible = false
 	label.visible = false
 	pass # Replace with function body.
@@ -59,6 +60,22 @@ func _on_Area2D_area_exited(area):
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 115.946
+
+[sub_resource type="Animation" id=13]
+resource_name = "CRY"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CryKid:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0 ]
+}
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -107,6 +124,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CryKid:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -319,6 +348,7 @@ position = Vector2( -10.5405, -30.2704 )
 scale = Vector2( 11, 11 )
 texture = ExtResource( 3 )
 hframes = 2
+frame = 1
 script = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/Area2D"]
@@ -331,6 +361,7 @@ texture = ExtResource( 8 )
 hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="seviye/Area2D"]
+anims/CRY = SubResource( 13 )
 anims/RESET = SubResource( 12 )
 anims/hug = SubResource( 11 )
 
