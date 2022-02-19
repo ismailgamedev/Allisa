@@ -1,0 +1,206 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://sahneler/yagmur/Yagmur.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=2]
+[ext_resource path="res://varliklar/cizimler/cry_kid.jpg" type="Texture" id=3]
+[ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 50.5, 243 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 548, 47 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 3
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Sprite
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+var icerde = false
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$Label.visible = false
+	pass # Replace with function body.
+
+func _physics_process(delta):
+	if Input.is_action_just_pressed(\"etkilesim\") and icerde == true:
+		## bla bla
+		print(\"etkilesti\")
+		pass
+	pass
+
+
+func _on_Area2D_area_entered(area):
+	$Label.visible = true
+	icerde = true
+	pass # Replace with function body.
+
+
+func _on_Area2D_area_exited(area):
+	$Label.visible = false
+	icerde = false
+	pass # Replace with function body.
+"
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 115.946
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Area2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+onready var sahne_gecisi = get_node(\"../../CanvasLayer/Sahnegecisi\")
+func _on_yeni_seviye_kapisi_area_entered(area):
+	sahne_gecisi.sahneye_git()
+	pass # Replace with function body.
+"
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32.5, 117 )
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+// Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
+// If you use this shader, I would prefer it if you gave credit to me and my channel
+
+uniform vec3 color = vec3(0.5, 0.5, 0.5);
+uniform int OCTAVES = 4;
+
+float rand(vec2 coord){
+	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
+}
+
+float noise(vec2 coord){
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+
+	// 4 corners of a rectangle surrounding our point
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+
+	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
+}
+
+float fbm(vec2 coord){
+	float value = 0.0;
+	float scale = 0.5;
+
+	for(int i = 0; i < OCTAVES; i++){
+		value += noise(coord) * scale;
+		coord *= 2.0;
+		scale *= 0.5;
+	}
+	return value;
+}
+
+void fragment() {
+	vec2 coord = UV * 20.0;
+
+	vec2 motion = vec2( fbm(coord + vec2(TIME * -0.5, TIME * 0.5)) );
+
+	float final = fbm(coord + motion);
+
+	COLOR = vec4(color, final * 0.5);
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/color = Vector3( 0.5, 0.5, 0.5 )
+shader_param/OCTAVES = 4
+
+[node name="Sahne1" type="Node"]
+
+[node name="seviye" type="Node2D" parent="."]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="seviye"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/StaticBody2D2"]
+position = Vector2( 40.5, 233 )
+shape = SubResource( 9 )
+
+[node name="Alisa" parent="seviye" instance=ExtResource( 2 )]
+position = Vector2( 242, 437 )
+
+[node name="Particles2D" parent="seviye" instance=ExtResource( 1 )]
+position = Vector2( 871, 10 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="seviye"]
+position = Vector2( 3, 476 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/StaticBody2D"]
+position = Vector2( 538, 37 )
+shape = SubResource( 1 )
+
+[node name="CryKid" type="Sprite" parent="seviye"]
+material = SubResource( 2 )
+position = Vector2( 656, 444 )
+scale = Vector2( 0.284616, 0.264286 )
+texture = ExtResource( 3 )
+script = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="seviye/CryKid"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/CryKid/Area2D"]
+shape = SubResource( 3 )
+
+[node name="Label" type="Label" parent="seviye/CryKid"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -179.5
+margin_top = -140.0
+margin_right = -80.5
+margin_bottom = -126.0
+text = "\"E\" Cocuga Saril"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="yeni_seviye_kapisi" type="Area2D" parent="seviye"]
+position = Vector2( 1023, 444 )
+script = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/yeni_seviye_kapisi"]
+position = Vector2( 22.5, -97 )
+shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="seviye"]
+material = SubResource( 8 )
+position = Vector2( 809, -20 )
+scale = Vector2( 30, 30 )
+texture = ExtResource( 5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
+
+[connection signal="area_entered" from="seviye/CryKid/Area2D" to="seviye/CryKid" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="seviye/CryKid/Area2D" to="seviye/CryKid" method="_on_Area2D_area_exited"]
+[connection signal="area_entered" from="seviye/yeni_seviye_kapisi" to="seviye/yeni_seviye_kapisi" method="_on_yeni_seviye_kapisi_area_entered"]

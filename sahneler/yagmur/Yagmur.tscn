@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://sahneler/yagmur/rain.png" type="Texture" id=1]
+[ext_resource path="res://sahneler/yagmur/ran.png" type="Texture" id=1]
 
 [sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 0.0785446, 0.250842, 0.34668, 1, 1, 1, 1, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.765625, 0.765625, 0.765625, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
@@ -17,15 +17,15 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = -25.0
 scale = 0.1
-color = Color( 0.168627, 0.443137, 0.505882, 1 )
+color = Color( 0.396078, 0.396078, 0.396078, 1 )
 color_ramp = SubResource( 2 )
 
 [node name="Particles2D" type="Particles2D"]
+z_index = -2
 amount = 500
-lifetime = 2.5
-speed_scale = 1.5
-randomness = 0.16
-visibility_rect = Rect2( -300, -100, 600, 500 )
+lifetime = 4.0
+speed_scale = 2.5
+visibility_rect = Rect2( -800, -100, 1600, 750 )
 draw_order = 1
 process_material = SubResource( 3 )
 texture = ExtResource( 1 )
