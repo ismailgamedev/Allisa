@@ -22,7 +22,7 @@ extents = Vector2( 18.3333, 17 )
 [node name="seviye" type="Node2D" parent="."]
 
 [node name="Alisa" parent="seviye" instance=ExtResource( 1 )]
-position = Vector2( 830, 190 )
+position = Vector2( 817, 130 )
 
 [node name="zemin" type="StaticBody2D" parent="seviye"]
 position = Vector2( 9, 494 )
