@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=2]
+[ext_resource path="res://varliklar/font/new_dynamicfont.tres" type="DynamicFont" id=3]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -14,6 +15,9 @@ __meta__ = {
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BtnCont" type="VBoxContainer" parent="."]
 anchor_right = 0.277
@@ -27,29 +31,28 @@ __meta__ = {
 }
 
 [node name="OynaBtn" type="Button" parent="BtnCont"]
-margin_top = 117.0
+margin_top = 165.0
 margin_right = 284.0
-margin_bottom = 192.0
+margin_bottom = 240.0
 rect_min_size = Vector2( 284, 75 )
+custom_fonts/font = ExtResource( 3 )
 text = "Oyna"
 
 [node name="HakkindaBtn" type="Button" parent="BtnCont"]
-margin_top = 214.0
+margin_top = 262.0
 margin_right = 284.0
-margin_bottom = 289.0
+margin_bottom = 337.0
 rect_min_size = Vector2( 284, 75 )
-
-[node name="AyarlarBtn" type="Button" parent="BtnCont"]
-margin_top = 311.0
-margin_right = 284.0
-margin_bottom = 386.0
-rect_min_size = Vector2( 284, 75 )
+custom_fonts/font = ExtResource( 3 )
+text = "HakkInda"
 
 [node name="CikBtn" type="Button" parent="BtnCont"]
-margin_top = 408.0
+margin_top = 359.0
 margin_right = 284.0
-margin_bottom = 483.0
+margin_bottom = 434.0
 rect_min_size = Vector2( 284, 75 )
+custom_fonts/font = ExtResource( 3 )
+text = "CIk"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -58,5 +61,4 @@ visible = false
 
 [connection signal="pressed" from="BtnCont/OynaBtn" to="." method="_on_OynaBtn_pressed"]
 [connection signal="pressed" from="BtnCont/HakkindaBtn" to="." method="_on_HakkindaBtn_pressed"]
-[connection signal="pressed" from="BtnCont/AyarlarBtn" to="." method="_on_AyarlarBtn_pressed"]
 [connection signal="pressed" from="BtnCont/CikBtn" to="." method="_on_CikBtn_pressed"]
