@@ -31,6 +31,7 @@ margin_top = 117.0
 margin_right = 284.0
 margin_bottom = 192.0
 rect_min_size = Vector2( 284, 75 )
+text = "Oyna"
 
 [node name="HakkindaBtn" type="Button" parent="BtnCont"]
 margin_top = 214.0
@@ -54,3 +55,8 @@ rect_min_size = Vector2( 284, 75 )
 
 [node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 2 )]
 visible = false
+
+[connection signal="pressed" from="BtnCont/OynaBtn" to="." method="_on_OynaBtn_pressed"]
+[connection signal="pressed" from="BtnCont/HakkindaBtn" to="." method="_on_HakkindaBtn_pressed"]
+[connection signal="pressed" from="BtnCont/AyarlarBtn" to="." method="_on_AyarlarBtn_pressed"]
+[connection signal="pressed" from="BtnCont/CikBtn" to="." method="_on_CikBtn_pressed"]

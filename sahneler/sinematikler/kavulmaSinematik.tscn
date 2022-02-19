@@ -11,7 +11,9 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 diger_sahne_path = "res://sahneler/oyun/Sahne1.tscn"
+
 cizim_node_path = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
