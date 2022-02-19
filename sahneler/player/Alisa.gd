@@ -7,7 +7,9 @@ export var speed = 100
 export var jump_speed = 350
 var gravity = 980
 
-onready var anim_p =get_node("AnimatedSprite")
+var hareket_izin = true
+
+onready var anim_player = get_node("AnimationPlayer")
 
 func _hareket(carpan):
 	velocity.x = 0
@@ -15,14 +17,14 @@ func _hareket(carpan):
 	if Input.is_action_pressed("hareket_sag"):
 		velocity.x += speed
 
-		anim_p.play("yuru")
-		anim_p.set_flip_h(false)
+		anim_player.play("walk")
+		$yurume.set_flip_h(false)
 		pass
 	if Input.is_action_pressed("hareket_sol"):
 		velocity.x -= speed
-		anim_p.set_flip_h(true)
-		anim_p.play("yuru")
 
+		anim_player.play("walk")
+		$yurume.set_flip_h(true)
 		pass
 	if is_on_floor():
 		if Input.is_action_just_pressed("ziplama"):
@@ -31,7 +33,8 @@ func _hareket(carpan):
 			pass
 
 	if velocity.x == 0:
-		anim_p.play("bekle")
+		#anim_p.play("bekle")
+		anim_player.play("idle")
 
 	velocity = move_and_slide(velocity,Vector2.UP)
 	pass
@@ -40,11 +43,13 @@ func _hareket(carpan):
 
 #######################################
 func _physics_process(delta):
-	_hareket(delta)
+	if hareket_izin ==true:
+		_hareket(delta)
 	pass
 
 
 func _ready():
+	_babaya_ayi_goster()
 	etkilesim_blogu.connect("area_entered",self,"_etkilesim")
 	pass
 #######################################
@@ -63,4 +68,15 @@ func _etkilesim(govde):
 			#govde._sevin()
 			pass
 		pass
+	pass
+
+
+func _babaya_ayi_goster():
+	hareket_izin = false
+	
+	anim_player.play("babaya_ayi_goster")
+	yield(get_tree().create_timer(2.1),"timeout")
+	anim_player.play("idle")
+	hareket_izin = true
+	
 	pass
