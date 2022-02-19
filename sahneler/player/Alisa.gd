@@ -8,7 +8,7 @@ export var jump_speed = 350
 var gravity = 980
 
 var hareket_izin = true
-
+var uzatti = false
 onready var anim_player = get_node("AnimationPlayer")
 
 func _hareket(carpan):
@@ -53,6 +53,8 @@ func _hareket(carpan):
 func _physics_process(delta):
 	if hareket_izin ==true:
 		_hareket(delta)
+	if Input.is_action_just_pressed("etkilesim") and uzatti == true:
+			_babaya_ayi_goster()
 	pass
 
 
@@ -76,6 +78,8 @@ func _etkilesim(govde):
 			#govde._sevin()
 			pass
 		pass
+
+
 	pass
 
 
@@ -83,8 +87,23 @@ func _babaya_ayi_goster():
 	hareket_izin = false
 	
 	anim_player.play("babaya_ayi_goster")
-	yield(get_tree().create_timer(2.1),"timeout")
+	yield(get_tree().create_timer(1.3),"timeout")
+	anim_player.play_backwards("babaya_ayi_goster_geri")
+	yield(get_tree().create_timer(1.7),"timeout")
 	anim_player.play("idle")
 	hareket_izin = true
 	
 	pass
+
+
+func _on_etkilesim_area_entered(area):
+	if area.is_in_group("Baba"):
+		uzatti = true
+
+
+
+func _on_etkilesim_area_exited(area):
+	if area.is_in_group("Baba"):
+		uzatti = false
+
+

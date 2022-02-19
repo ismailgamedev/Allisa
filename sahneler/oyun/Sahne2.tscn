@@ -1,198 +1,367 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://varliklar/cizimler/ip.png" type="Texture" id=3]
+[ext_resource path="res://varliklar/sesler/rain_ambient.mp3" type="AudioStream" id=3]
+[ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=4]
+[ext_resource path="res://varliklar/cizimler/aglak_bebe.png" type="Texture" id=5]
+[ext_resource path="res://varliklar/cizimler/hug_v1.png" type="Texture" id=6]
+[ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://sahneler/yagmur/Yagmur.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Shader" id=14]
+code = "shader_type canvas_item;
+
+// Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
+// If you use this shader, I would prefer it if you gave credit to me and my channel
+
+uniform vec3 color = vec3(0.5, 0.5, 0.5);
+uniform int OCTAVES = 4;
+
+float rand(vec2 coord){
+	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
+}
+
+float noise(vec2 coord){
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+
+	// 4 corners of a rectangle surrounding our point
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+
+	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
+}
+
+float fbm(vec2 coord){
+	float value = 0.0;
+	float scale = 0.5;
+
+	for(int i = 0; i < OCTAVES; i++){
+		value += noise(coord) * scale;
+		coord *= 2.0;
+		scale *= 0.5;
+	}
+	return value;
+}
+
+void fragment() {
+	vec2 coord = UV * 20.0;
+
+	vec2 motion = vec2( fbm(coord + vec2(TIME * -0.5, TIME * 0.5)) );
+
+	float final = fbm(coord + motion);
+
+	COLOR = vec4(color, final * 0.5);
+}"
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 14 )
+shader_param/color = Vector3( 0.5, 0.5, 0.5 )
+shader_param/OCTAVES = 4
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Sprite
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+onready var label = get_node(\"../Label\")
+onready var anim_p = get_node(\"../AnimationPlayer\")
+onready var _hugg = get_node(\"../hug\")
+var icerde = false
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	anim_p.play(\"CRY\")
+	_hugg.visible = false
+	label.visible = false
+	pass # Replace with function body.
+
+func _physics_process(delta):
+	if Input.is_action_just_pressed(\"etkilesim\") and icerde == true:
+		anim_p.play(\"hug\")
+		yield(anim_p,\"animation_finished\")
+		$\"/root/GlobalWorldEnvironment/AnimationPlayer\".play(\"fade\")
+		print(\"etkilesti\")
+		pass
+	pass
+
+
+func _on_Area2D_area_entered(area):
+	label.visible = true
+	icerde = true
+	pass # Replace with function body.
+
+
+func _on_Area2D_area_exited(area):
+	label.visible = false
+	icerde = false
+	pass # Replace with function body.
+
+
+"
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 115.946
+
+[sub_resource type="Animation" id=9]
+resource_name = "CRY"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CryKid:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("hug:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Alisa:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CryKid:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("hug:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CryKid:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "hug"
+length = 2.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("../Alisa:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 626, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../Alisa:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 461, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CryKid:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("hug:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 2, 2.1, 2.2, 2.3, 2.4 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../Alisa:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("hug:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 510.5, 30 )
+extents = Vector2( 528.5, 30 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3.033, 10 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 18.3333, 17 )
-
-[sub_resource type="CircleShape2D" id=3]
-
-[sub_resource type="RectangleShape2D" id=4]
-
-[node name="Node" type="Node"]
+[node name="Sahne2" type="Node"]
 
 [node name="seviye" type="Node2D" parent="."]
 
+[node name="yagmur" parent="seviye" instance=ExtResource( 8 )]
+position = Vector2( 871, 10 )
+
+[node name="sis" type="Sprite" parent="seviye"]
+material = SubResource( 13 )
+position = Vector2( 808, -12 )
+scale = Vector2( 30, 30 )
+texture = ExtResource( 2 )
+
 [node name="Alisa" parent="seviye" instance=ExtResource( 1 )]
-position = Vector2( 817, 130 )
+position = Vector2( 108, 459 )
 
-[node name="zemin" type="StaticBody2D" parent="seviye"]
-position = Vector2( 9, 494 )
+[node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 9 )]
+position = Vector2( 1006, 367 )
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne3.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/zemin"]
-position = Vector2( 500.5, 20 )
+[node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 9 )]
+position = Vector2( -35, 367 )
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne1_5.tscn"
+
+[node name="Cocuk" type="Area2D" parent="seviye"]
+position = Vector2( 654, 470 )
+scale = Vector2( 0.284616, 0.264286 )
+
+[node name="Label" type="Label" parent="seviye/Cocuk"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -91.3513
+margin_top = -132.432
+margin_right = 107.649
+margin_bottom = -102.432
+custom_fonts/font = SubResource( 6 )
+text = "\"E\" Cocuga Saril"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CryKid" type="Sprite" parent="seviye/Cocuk"]
+position = Vector2( -10.5405, -30.2704 )
+scale = Vector2( 11, 11 )
+texture = ExtResource( 5 )
+hframes = 2
+frame = 1
+script = SubResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/Cocuk"]
+shape = SubResource( 8 )
+
+[node name="hug" type="Sprite" parent="seviye/Cocuk"]
+position = Vector2( -14.054, -41.6217 )
+scale = Vector2( 11, 11 )
+texture = ExtResource( 6 )
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="seviye/Cocuk"]
+anims/CRY = SubResource( 9 )
+anims/RESET = SubResource( 10 )
+anims/hug = SubResource( 11 )
+
+[node name="duvarlar" type="Node" parent="seviye"]
+
+[node name="zemin" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( 9, 495 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin"]
+position = Vector2( 482.5, 20 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="seviye"]
-position = Vector2( 914, 365 )
-scale = Vector2( 1, 3.64062 )
-texture = ExtResource( 2 )
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Sprite2" type="Sprite" parent="seviye"]
-position = Vector2( 858, 233 )
-rotation = -0.634056
-scale = Vector2( 1, 3.64062 )
-texture = ExtResource( 2 )
+[node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
 
-[node name="Sprite3" type="Polygon2D" parent="seviye"]
-position = Vector2( 948, 254 )
-rotation = 1.79898
-scale = Vector2( 1, 3.64062 )
-texture = ExtResource( 2 )
-polygon = PoolVector2Array( 63.6105, -4.90359, 32, 32, -111.797, 51.1215, -179.812, -14.7549, 5.75191, -18.6961 )
-uv = PoolVector2Array( 64, 0, 64, 64, 0, 64, 0, 0, 63, 0 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ) ]
+[node name="yagmur_sesi" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 548, 254 )
+stream = ExtResource( 3 )
+volume_db = -4.546
+autoplay = true
+attenuation = 0.00257716
 
-[node name="salincak" type="Node2D" parent="seviye"]
-position = Vector2( 836, 295 )
-scale = Vector2( 1.5, 1.5 )
-
-[node name="ip" type="RigidBody2D" parent="seviye/salincak"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/salincak/ip"]
-shape = SubResource( 2 )
-
-[node name="Icon" type="Sprite" parent="seviye/salincak/ip"]
-scale = Vector2( 0.1, 0.08 )
-texture = ExtResource( 3 )
-
-[node name="ip_ip2" type="PinJoint2D" parent="seviye/salincak"]
-position = Vector2( 0, 9 )
-node_a = NodePath("../ip")
-node_b = NodePath("../ip2")
-
-[node name="ip2" type="RigidBody2D" parent="seviye/salincak"]
-position = Vector2( 0, 17 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/salincak/ip2"]
-shape = SubResource( 2 )
-
-[node name="Icon" type="Sprite" parent="seviye/salincak/ip2"]
-scale = Vector2( 0.1, 0.08 )
-texture = ExtResource( 3 )
-
-[node name="ip2_ip3" type="PinJoint2D" parent="seviye/salincak"]
-position = Vector2( 0, 24 )
-node_a = NodePath("../ip2")
-node_b = NodePath("../ip3")
-
-[node name="ip3" type="RigidBody2D" parent="seviye/salincak"]
-position = Vector2( 0, 33 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/salincak/ip3"]
-shape = SubResource( 2 )
-
-[node name="Icon" type="Sprite" parent="seviye/salincak/ip3"]
-scale = Vector2( 0.1, 0.08 )
-texture = ExtResource( 3 )
-
-[node name="PinJoint2D" type="PinJoint2D" parent="seviye/salincak"]
-position = Vector2( 0, 40.6667 )
-node_a = NodePath("../ip3")
-node_b = NodePath("../ip4")
-
-[node name="ip4" type="RigidBody2D" parent="seviye/salincak"]
-position = Vector2( 0.666626, 57.3333 )
-
-[node name="Icon" type="Sprite" parent="seviye/salincak/ip4"]
-scale = Vector2( 0.595, 0.556 )
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/salincak/ip4"]
-position = Vector2( -0.333313, -1 )
-shape = SubResource( 5 )
-
-[node name="temel" type="PinJoint2D" parent="seviye/salincak"]
-position = Vector2( 0, -12 )
-node_a = NodePath("../StaticBody2D")
-node_b = NodePath("../ip")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="seviye/salincak"]
-position = Vector2( 0, -12 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/salincak/StaticBody2D"]
-shape = SubResource( 3 )
-
-[node name="dal_salincak_pin" type="PinJoint2D" parent="seviye"]
-position = Vector2( 836, 252 )
-node_a = NodePath("../dal/dal3")
-node_b = NodePath("../salincak/ip")
-
-[node name="dal" type="Node2D" parent="seviye"]
-position = Vector2( 909, 297 )
-rotation = -0.312412
-
-[node name="dal" type="RigidBody2D" parent="seviye/dal"]
-
-[node name="Ip" type="Sprite" parent="seviye/dal/dal"]
-scale = Vector2( 0.5, 0.3 )
-texture = ExtResource( 3 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="seviye/dal/dal"]
-scale = Vector2( 0.5, 0.3 )
-polygon = PoolVector2Array( 14, -124.6, 14, -122.6, 24, -108.6, 24, 23, 25, 106, 23.7, 106, 22.7, 112, 21, 112, 14, 121, 11.8, 121, 8.8, 124, 4.2, 124, -6, 125.3, -6, 123.4, -15, 120.4, -15, 118.6, -25, 104.6, -25, -23, -26, -110, -24.7, -110, -23.7, -116, -22, -116, -15, -125, -12.3, -125, -7, -127.3, -7, -128, -0.6, -128 )
-
-[node name="dal_dal" type="PinJoint2D" parent="seviye/dal"]
-position = Vector2( 0.4375, -20.876 )
-node_a = NodePath("../dal2")
-node_b = NodePath("../dal")
-
-[node name="dal2" type="RigidBody2D" parent="seviye/dal"]
-position = Vector2( -13.7357, -48.5729 )
-rotation = -0.545754
-
-[node name="Ip" type="Sprite" parent="seviye/dal/dal2"]
-scale = Vector2( 0.5, 0.3 )
-texture = ExtResource( 3 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="seviye/dal/dal2"]
-scale = Vector2( 0.5, 0.3 )
-polygon = PoolVector2Array( 14, -124.6, 14, -122.6, 24, -108.6, 24, 23, 25, 106, 23.7, 106, 22.7, 112, 21, 112, 14, 121, 11.8, 121, 8.8, 124, 4.2, 124, -6, 125.3, -6, 123.4, -15, 120.4, -15, 118.6, -25, 104.6, -25, -23, -26, -110, -24.7, -110, -23.7, -116, -22, -116, -15, -125, -12.3, -125, -7, -127.3, -7, -128, -0.6, -128 )
-
-[node name="dal_dal2" type="PinJoint2D" parent="seviye/dal"]
-position = Vector2( -25.3026, -68.0718 )
-node_a = NodePath("../dal3")
-node_b = NodePath("../dal2")
-
-[node name="dal3" type="RigidBody2D" parent="seviye/dal"]
-position = Vector2( -57.7159, -84.8463 )
-rotation = -1.19434
-
-[node name="Ip" type="Sprite" parent="seviye/dal/dal3"]
-scale = Vector2( 0.5, 0.3 )
-texture = ExtResource( 3 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="seviye/dal/dal3"]
-scale = Vector2( 0.5, 0.3 )
-polygon = PoolVector2Array( 14, -124.6, 14, -122.6, 24, -108.6, 24, 23, 25, 106, 23.7, 106, 22.7, 112, 21, 112, 14, 121, 11.8, 121, 8.8, 124, 4.2, 124, -6, 125.3, -6, 123.4, -15, 120.4, -15, 118.6, -25, 104.6, -25, -23, -26, -110, -24.7, -110, -23.7, -116, -22, -116, -15, -125, -12.3, -125, -7, -127.3, -7, -128, -0.6, -128 )
-
-[node name="agac" type="StaticBody2D" parent="seviye/dal"]
-position = Vector2( -6.53644, -90.384 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/dal/agac"]
-shape = SubResource( 4 )
-
-[node name="PinJoint2D" type="PinJoint2D" parent="seviye/dal"]
-position = Vector2( -2.8078, 37.9752 )
-node_a = NodePath("../agac2")
-node_b = NodePath("../dal")
-
-[node name="agac2" type="StaticBody2D" parent="seviye/dal"]
-position = Vector2( -2.8078, 37.9752 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/dal/agac2"]
-shape = SubResource( 4 )
-
-[node name="dal_agac" type="PinJoint2D" parent="seviye/dal"]
-position = Vector2( -13.0499, -76.7248 )
-node_a = NodePath("../agac")
-node_b = NodePath("../dal2")
-softness = 4.93
+[connection signal="area_entered" from="seviye/Cocuk" to="seviye/Cocuk/CryKid" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="seviye/Cocuk" to="seviye/Cocuk/CryKid" method="_on_Area2D_area_exited"]

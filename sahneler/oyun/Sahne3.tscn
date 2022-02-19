@@ -1,10 +1,323 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://varliklar/cizimler/ip.png" type="Texture" id=3]
+[ext_resource path="res://sahneler/top/top.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=5]
+[ext_resource path="res://varliklar/sesler/rain_ambient.mp3" type="AudioStream" id=6]
+[ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sahneler/yagmur/Yagmur.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+// Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
+// If you use this shader, I would prefer it if you gave credit to me and my channel
+
+uniform vec3 color = vec3(0.5, 0.5, 0.5);
+uniform int OCTAVES = 4;
+
+float rand(vec2 coord){
+	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
+}
+
+float noise(vec2 coord){
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+
+	// 4 corners of a rectangle surrounding our point
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+
+	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
+}
+
+float fbm(vec2 coord){
+	float value = 0.0;
+	float scale = 0.5;
+
+	for(int i = 0; i < OCTAVES; i++){
+		value += noise(coord) * scale;
+		coord *= 2.0;
+		scale *= 0.5;
+	}
+	return value;
+}
+
+void fragment() {
+	vec2 coord = UV * 20.0;
+
+	vec2 motion = vec2( fbm(coord + vec2(TIME * -0.5, TIME * 0.5)) );
+
+	float final = fbm(coord + motion);
+
+	COLOR = vec4(color, final * 0.5);
+}"
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 12 )
+shader_param/color = Vector3( 0.5, 0.5, 0.5 )
+shader_param/OCTAVES = 4
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 703, 30 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3.033, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 18.3333, 7.66667 )
+
+[sub_resource type="CircleShape2D" id=4]
+
+[sub_resource type="RectangleShape2D" id=5]
 
 [node name="Sahne3" type="Node"]
 
 [node name="seviye" type="Node2D" parent="."]
 
+[node name="yagmur" parent="seviye" instance=ExtResource( 8 )]
+position = Vector2( 871, 10 )
+
+[node name="sis" type="Sprite" parent="seviye"]
+material = SubResource( 13 )
+position = Vector2( 808, -12 )
+scale = Vector2( 30, 30 )
+texture = ExtResource( 2 )
+
 [node name="Alisa" parent="seviye" instance=ExtResource( 1 )]
 position = Vector2( 146, 381 )
+
+[node name="top" parent="seviye" instance=ExtResource( 4 )]
+
+[node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 5 )]
+position = Vector2( -17, 359 )
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
+
+[node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 5 )]
+position = Vector2( 1336, 359 )
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne3.tscn"
+
+[node name="zemin" type="StaticBody2D" parent="seviye"]
+position = Vector2( 9, 494 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/zemin"]
+position = Vector2( 657, 20 )
+shape = SubResource( 1 )
+
+[node name="agac" type="Node" parent="seviye"]
+
+[node name="Sprite" type="Sprite" parent="seviye/agac"]
+position = Vector2( 914, 365 )
+scale = Vector2( 1, 3.64062 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="seviye/agac"]
+position = Vector2( 858, 233 )
+rotation = -0.634056
+scale = Vector2( 1, 3.64062 )
+texture = ExtResource( 2 )
+
+[node name="Sprite3" type="Polygon2D" parent="seviye/agac"]
+position = Vector2( 948, 254 )
+rotation = 1.79898
+scale = Vector2( 1, 3.64062 )
+texture = ExtResource( 2 )
+polygon = PoolVector2Array( 63.6105, -4.90359, 32, 32, -111.797, 51.1215, -179.812, -14.7549, 5.75191, -18.6961 )
+uv = PoolVector2Array( 64, 0, 64, 64, 0, 64, 0, 0, 63, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ) ]
+
+[node name="salincak" type="Node2D" parent="seviye/agac"]
+position = Vector2( 836, 309 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="ip" type="RigidBody2D" parent="seviye/agac/salincak"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/salincak/ip"]
+shape = SubResource( 2 )
+
+[node name="Icon" type="Sprite" parent="seviye/agac/salincak/ip"]
+scale = Vector2( 0.1, 0.08 )
+texture = ExtResource( 3 )
+
+[node name="ip_ip2" type="PinJoint2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 9 )
+node_a = NodePath("../ip")
+node_b = NodePath("../ip2")
+
+[node name="ip2" type="RigidBody2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 17 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/salincak/ip2"]
+shape = SubResource( 2 )
+
+[node name="Icon" type="Sprite" parent="seviye/agac/salincak/ip2"]
+scale = Vector2( 0.1, 0.08 )
+texture = ExtResource( 3 )
+
+[node name="ip2_ip3" type="PinJoint2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 24 )
+node_a = NodePath("../ip2")
+node_b = NodePath("../ip3")
+
+[node name="ip3" type="RigidBody2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 33 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/salincak/ip3"]
+shape = SubResource( 2 )
+
+[node name="Icon" type="Sprite" parent="seviye/agac/salincak/ip3"]
+scale = Vector2( 0.1, 0.08 )
+texture = ExtResource( 3 )
+
+[node name="ip5" type="RigidBody2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 49.3333 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/salincak/ip5"]
+shape = SubResource( 2 )
+
+[node name="Icon" type="Sprite" parent="seviye/agac/salincak/ip5"]
+scale = Vector2( 0.1, 0.08 )
+texture = ExtResource( 3 )
+
+[node name="ip6" type="RigidBody2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 66 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/salincak/ip6"]
+shape = SubResource( 2 )
+
+[node name="Icon" type="Sprite" parent="seviye/agac/salincak/ip6"]
+scale = Vector2( 0.1, 0.08 )
+texture = ExtResource( 3 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 40.6667 )
+node_a = NodePath("../ip3")
+node_b = NodePath("../ip5")
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 58.6667 )
+node_a = NodePath("../ip5")
+node_b = NodePath("../ip6")
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 76 )
+node_a = NodePath("../ip6")
+node_b = NodePath("../ip4")
+
+[node name="ip4" type="RigidBody2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 80.6667 )
+
+[node name="Icon" type="Sprite" parent="seviye/agac/salincak/ip4"]
+position = Vector2( 0, 8.22931 )
+scale = Vector2( 0.595, 0.257166 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/salincak/ip4"]
+position = Vector2( -0.333313, 6.99997 )
+shape = SubResource( 3 )
+
+[node name="temel" type="PinJoint2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, -12 )
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../ip")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, -12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/salincak/StaticBody2D"]
+shape = SubResource( 4 )
+
+[node name="dal_salincak_pin" type="PinJoint2D" parent="seviye/agac"]
+position = Vector2( 836, 266 )
+node_a = NodePath("../dal/dal3")
+node_b = NodePath("../salincak/ip")
+
+[node name="dal" type="Node2D" parent="seviye/agac"]
+position = Vector2( 909, 311 )
+rotation = -0.312412
+
+[node name="dal" type="RigidBody2D" parent="seviye/agac/dal"]
+
+[node name="Ip" type="Sprite" parent="seviye/agac/dal/dal"]
+scale = Vector2( 0.5, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="seviye/agac/dal/dal"]
+scale = Vector2( 0.5, 0.3 )
+polygon = PoolVector2Array( 14, -124.6, 14, -122.6, 24, -108.6, 24, 23, 25, 106, 23.7, 106, 22.7, 112, 21, 112, 14, 121, 11.8, 121, 8.8, 124, 4.2, 124, -6, 125.3, -6, 123.4, -15, 120.4, -15, 118.6, -25, 104.6, -25, -23, -26, -110, -24.7, -110, -23.7, -116, -22, -116, -15, -125, -12.3, -125, -7, -127.3, -7, -128, -0.6, -128 )
+
+[node name="dal_dal" type="PinJoint2D" parent="seviye/agac/dal"]
+position = Vector2( 0.4375, -20.876 )
+node_a = NodePath("../dal2")
+node_b = NodePath("../dal")
+
+[node name="dal2" type="RigidBody2D" parent="seviye/agac/dal"]
+position = Vector2( -13.7357, -48.5729 )
+rotation = -0.545754
+
+[node name="Ip" type="Sprite" parent="seviye/agac/dal/dal2"]
+scale = Vector2( 0.5, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="seviye/agac/dal/dal2"]
+scale = Vector2( 0.5, 0.3 )
+polygon = PoolVector2Array( 14, -124.6, 14, -122.6, 24, -108.6, 24, 23, 25, 106, 23.7, 106, 22.7, 112, 21, 112, 14, 121, 11.8, 121, 8.8, 124, 4.2, 124, -6, 125.3, -6, 123.4, -15, 120.4, -15, 118.6, -25, 104.6, -25, -23, -26, -110, -24.7, -110, -23.7, -116, -22, -116, -15, -125, -12.3, -125, -7, -127.3, -7, -128, -0.6, -128 )
+
+[node name="dal_dal2" type="PinJoint2D" parent="seviye/agac/dal"]
+position = Vector2( -25.3026, -68.0718 )
+node_a = NodePath("../dal3")
+node_b = NodePath("../dal2")
+
+[node name="dal3" type="RigidBody2D" parent="seviye/agac/dal"]
+position = Vector2( -57.7159, -84.8463 )
+rotation = -1.19434
+
+[node name="Ip" type="Sprite" parent="seviye/agac/dal/dal3"]
+scale = Vector2( 0.5, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="seviye/agac/dal/dal3"]
+scale = Vector2( 0.5, 0.3 )
+polygon = PoolVector2Array( 14, -124.6, 14, -122.6, 24, -108.6, 24, 23, 25, 106, 23.7, 106, 22.7, 112, 21, 112, 14, 121, 11.8, 121, 8.8, 124, 4.2, 124, -6, 125.3, -6, 123.4, -15, 120.4, -15, 118.6, -25, 104.6, -25, -23, -26, -110, -24.7, -110, -23.7, -116, -22, -116, -15, -125, -12.3, -125, -7, -127.3, -7, -128, -0.6, -128 )
+
+[node name="agac" type="StaticBody2D" parent="seviye/agac/dal"]
+position = Vector2( -6.53644, -90.384 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/dal/agac"]
+shape = SubResource( 5 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="seviye/agac/dal"]
+position = Vector2( -2.8078, 37.9752 )
+node_a = NodePath("../agac2")
+node_b = NodePath("../dal")
+
+[node name="agac2" type="StaticBody2D" parent="seviye/agac/dal"]
+position = Vector2( -2.8078, 37.9752 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/dal/agac2"]
+shape = SubResource( 5 )
+
+[node name="dal_agac" type="PinJoint2D" parent="seviye/agac/dal"]
+position = Vector2( -13.0499, -76.7248 )
+node_a = NodePath("../agac")
+node_b = NodePath("../dal2")
+softness = 4.93
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 7 )]
+visible = false
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
+
+[node name="yagmur_sesi" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 704, 350 )
+stream = ExtResource( 6 )
+volume_db = -4.546
+autoplay = true
+attenuation = 0.00257716

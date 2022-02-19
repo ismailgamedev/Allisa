@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="PhysicsMaterial" id=6]
+friction = 3.0
+bounce = 0.4
+
+[sub_resource type="CircleShape2D" id=7]
+
+[node name="top" type="RigidBody2D"]
+position = Vector2( 832, 205 )
+rotation = -1.13604
+mass = 0.29
+physics_material_override = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -2.07231, 9.7829 )
+shape = SubResource( 7 )

@@ -11,5 +11,5 @@ func _on_HakkindaBtn_pressed():
 
 
 func _on_CikBtn_pressed():
-	pass # Replace with function body.
+	get_tree().quit()
 

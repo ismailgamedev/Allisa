@@ -1,18 +1,12 @@
 [gd_scene load_steps=12 format=2]
 
+[ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=2]
 [ext_resource path="res://varliklar/cizimler/baba_cry.png" type="Texture" id=3]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=4]
 [ext_resource path="res://sahneler/etkilesimli_objeler/Baba.gd" type="Script" id=7]
 [ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://varliklar/cizimler/evearkaplan.png" type="Texture" id=9]
-[ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=10]
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 41.25, 97.5 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 268.5, 48.5 )
+[ext_resource path="res://varliklar/cizimler/evesahne2.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 40.5, 38 )
@@ -21,7 +15,13 @@ extents = Vector2( 40.5, 38 )
 size = 32
 font_data = ExtResource( 8 )
 
-[node name="Sahne1" type="Node"]
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 41.25, 97.5 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 285, 50 )
+
+[node name="Sahne1_5" type="Node"]
 
 [node name="seviye" type="Node2D" parent="."]
 
@@ -30,30 +30,11 @@ position = Vector2( 622, 354 )
 scale = Vector2( 2.83333, 2.83333 )
 texture = ExtResource( 9 )
 
-[node name="duvarlar" type="Node" parent="seviye"]
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="seviye/duvarlar"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D2"]
-position = Vector2( 359.75, 383.5 )
-shape = SubResource( 9 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="seviye/duvarlar"]
-position = Vector2( 3, 476 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D"]
-position = Vector2( 648.5, 53.5 )
-shape = SubResource( 1 )
-
 [node name="Alisa" parent="seviye" instance=ExtResource( 2 )]
-position = Vector2( 461, 448 )
-
-[node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 10 )]
-position = Vector2( 929, 365 )
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne1_5.tscn"
+position = Vector2( 496, 448 )
 
 [node name="Baba" type="Area2D" parent="seviye" groups=["Baba"]]
-position = Vector2( 666, 432 )
+position = Vector2( 585.625, 432 )
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/Baba"]
@@ -69,20 +50,44 @@ margin_right = 174.0
 margin_bottom = -16.0
 rect_scale = Vector2( 0.325564, 0.325564 )
 custom_fonts/font = SubResource( 11 )
-text = "\"E\" Baba ile oyna"
+text = "\"E\" Anne ile oyna"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BabaCry" type="Sprite" parent="seviye/Baba"]
-position = Vector2( 0, -4.99997 )
+position = Vector2( 0, -5 )
 scale = Vector2( 2.07812, 2.07812 )
 texture = ExtResource( 3 )
+
+[node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 1 )]
+position = Vector2( 383, 360 )
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne1.tscn"
+
+[node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 1 )]
+position = Vector2( 924, 361 )
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
 
 [node name="SabitCamera" type="Camera2D" parent="seviye"]
 position = Vector2( 622, 354 )
 current = true
 zoom = Vector2( 0.57, 0.536 )
+
+[node name="duvarlar" type="Node" parent="seviye"]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( -53, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D2"]
+position = Vector2( 359.75, 383.5 )
+shape = SubResource( 9 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( 3, 476 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D"]
+position = Vector2( 632, 52 )
+shape = SubResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

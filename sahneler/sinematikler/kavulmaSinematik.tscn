@@ -13,7 +13,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-diger_sahne_path = "res://sahneler/sinematikler/kavulmaSinematik2.tscn"
+sonraki_sahne_yolu = "res://sahneler/sinematikler/kavulmaSinematik2.tscn"
 cizim_node_path = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
