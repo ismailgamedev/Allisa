@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/rain_ambient.mp3-1db66013ecc70f6250f6da6f46da01af.mp3str"
+
+[deps]
+
+source_file="res://varliklar/sesler/rain_ambient.mp3"
+dest_files=[ "res://.import/rain_ambient.mp3-1db66013ecc70f6250f6da6f46da01af.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

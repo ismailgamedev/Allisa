@@ -49,7 +49,7 @@ func _physics_process(delta):
 
 
 func _ready():
-	_babaya_ayi_goster()
+	#_babaya_ayi_goster()
 	etkilesim_blogu.connect("area_entered",self,"_etkilesim")
 	pass
 #######################################
