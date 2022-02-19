@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=1]
+
+[node name="Sahne3" type="Node"]
+
+[node name="seviye" type="Node2D" parent="."]
+
+[node name="Alisa" parent="seviye" instance=ExtResource( 1 )]
+position = Vector2( 146, 381 )
