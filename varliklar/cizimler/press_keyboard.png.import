@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/circle_03.png-07e2f314e4c16acd3899dd7fd8b52551.stex"
+path="res://.import/press_keyboard.png-6d0fa47b89a8ece5a81254f4452bd659.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sahneler/etkilesimli_objeler/circle_03.png"
-dest_files=[ "res://.import/circle_03.png-07e2f314e4c16acd3899dd7fd8b52551.stex" ]
+source_file="res://varliklar/cizimler/press_keyboard.png"
+dest_files=[ "res://.import/press_keyboard.png-6d0fa47b89a8ece5a81254f4452bd659.stex" ]
 
 [params]
 

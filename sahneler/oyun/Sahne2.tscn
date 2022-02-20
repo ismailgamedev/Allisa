@@ -1,6 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=1]
+[ext_resource path="res://varliklar/cizimler/press_keyboard.png" type="Texture" id=2]
+[ext_resource path="res://varliklar/cizimler/kalp.png" type="Texture" id=3]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=4]
 [ext_resource path="res://varliklar/cizimler/aglak_bebe.png" type="Texture" id=5]
 [ext_resource path="res://varliklar/cizimler/hug_v1.png" type="Texture" id=6]
@@ -22,6 +24,8 @@ script/source = "extends Sprite
 onready var label = get_node(\"../Label\")
 onready var anim_p = get_node(\"../AnimationPlayer\")
 onready var _hugg = get_node(\"../hug\")
+onready var kalpler = get_node(\"../kalp_particles\")
+
 var icerde = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,6 +40,7 @@ func _physics_process(delta):
 		yield(anim_p,\"animation_finished\")
 		$\"/root/GlobalWorldEnvironment/AnimationPlayer\".play(\"fade\")
 		print(\"etkilesti\")
+		kalpler.emitting = true
 		pass
 	pass
 
@@ -216,6 +221,14 @@ tracks/6/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="ParticlesMaterial" id=12]
+emission_shape = 2
+emission_box_extents = Vector3( 25, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 528.5, 30 )
 
@@ -251,6 +264,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite" type="Sprite" parent="seviye/Cocuk/Label"]
+visible = false
+position = Vector2( 25.186, 11.351 )
+texture = ExtResource( 2 )
+hframes = 5
+frame = 4
+
 [node name="CryKid" type="Sprite" parent="seviye/Cocuk"]
 position = Vector2( -10.5405, -30.2704 )
 scale = Vector2( 11, 11 )
@@ -272,6 +292,13 @@ hframes = 6
 anims/CRY = SubResource( 9 )
 anims/RESET = SubResource( 10 )
 anims/hug = SubResource( 11 )
+
+[node name="kalp_particles" type="Particles2D" parent="seviye/Cocuk"]
+position = Vector2( -3.51343, -90.8108 )
+emitting = false
+one_shot = true
+process_material = SubResource( 12 )
+texture = ExtResource( 3 )
 
 [node name="duvarlar" type="Node" parent="seviye"]
 
