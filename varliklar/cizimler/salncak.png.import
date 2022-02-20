@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/kopke_walk.png-e05b35d09630341f76951e47a7805ede.stex"
+path="res://.import/salncak.png-6e27386c6782dd553aa9562f16196f77.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://varliklar/cizimler/kopke_walk.png"
-dest_files=[ "res://.import/kopke_walk.png-e05b35d09630341f76951e47a7805ede.stex" ]
+source_file="res://varliklar/cizimler/salncak.png"
+dest_files=[ "res://.import/salncak.png-6e27386c6782dd553aa9562f16196f77.stex" ]
 
 [params]
 
