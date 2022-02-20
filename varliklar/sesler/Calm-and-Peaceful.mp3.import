@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Calm-and-Peaceful.mp3-e078ecff80570ed8b3ab402d8e666c70.mp3str"
+
+[deps]
+
+source_file="res://varliklar/sesler/Calm-and-Peaceful.mp3"
+dest_files=[ "res://.import/Calm-and-Peaceful.mp3-e078ecff80570ed8b3ab402d8e666c70.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
