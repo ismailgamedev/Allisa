@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=1]
 [ext_resource path="res://varliklar/paralax/middle.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sahneler/kopek/Adam.gd" type="Script" id=12]
 [ext_resource path="res://varliklar/cizimler/kamusal_oturma_alani.png" type="Texture" id=13]
+[ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 449.5, 24 )
@@ -55,6 +56,22 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
+[sub_resource type="Animation" id=13]
+resource_name = "cicek_ver"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 17, 18, 19, 20, 21, 22, 23 ]
+}
+
 [sub_resource type="Animation" id=11]
 resource_name = "sev"
 length = 1.2
@@ -70,6 +87,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 }
+
+[sub_resource type="DynamicFont" id=12]
+size = 32
+font_data = ExtResource( 14 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "kopek_adama_git"
@@ -231,19 +252,35 @@ script = ExtResource( 12 )
 position = Vector2( -35, 0.999996 )
 scale = Vector2( 2.07045, 2.25 )
 texture = ExtResource( 10 )
-hframes = 4
-vframes = 4
-frame = 3
+hframes = 5
+vframes = 5
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/Adam"]
-position = Vector2( 2, 0 )
+position = Vector2( 2, -4 )
 shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="seviye/Adam"]
 autoplay = "agla"
 anims/RESET = SubResource( 9 )
 anims/agla = SubResource( 10 )
+anims/cicek_ver = SubResource( 13 )
 anims/sev = SubResource( 11 )
+
+[node name="Label" type="Label" parent="seviye/Adam"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -35.0
+margin_top = -42.0
+margin_right = 189.0
+margin_bottom = -12.0
+rect_scale = Vector2( 0.325564, 0.325564 )
+custom_fonts/font = SubResource( 12 )
+text = "\"E\" Adam ile konus"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="kopek" type="Area2D" parent="seviye"]
 position = Vector2( 475, 119 )
@@ -274,5 +311,6 @@ anims/pozisyonyuru = SubResource( 8 )
 visible = false
 
 [connection signal="area_entered" from="seviye/Adam" to="seviye/Adam" method="_on_Adam_area_entered"]
+[connection signal="area_exited" from="seviye/Adam" to="seviye/Adam" method="_on_Adam_area_exited"]
 [connection signal="area_entered" from="seviye/kopek" to="seviye/kopek" method="_on_kopek_area_entered"]
 [connection signal="body_entered" from="seviye/kopek" to="seviye/kopek" method="_on_kopek_body_entered"]
