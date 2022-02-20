@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=1]
 [ext_resource path="res://varliklar/paralax/middle.png" type="Texture" id=2]
@@ -7,65 +7,12 @@
 [ext_resource path="res://varliklar/paralax/fore.png" type="Texture" id=5]
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=7]
-[ext_resource path="res://varliklar/cizimler/mezar.png" type="Texture" id=8]
-[ext_resource path="res://varliklar/cizimler/mezarkadin_anim.png" type="Texture" id=9]
-[ext_resource path="res://sahneler/oyun/mezar.gd" type="Script" id=10]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 544.5, 25.5 )
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 49.0408
-
-[sub_resource type="Animation" id=4]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Icon:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 3 ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "idle"
-length = 1.032
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Icon:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "sev"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Icon:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13 ]
-}
-
-[node name="Sahne5" type="Node"]
+[node name="Sahne6" type="Node"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -168,40 +115,8 @@ position = Vector2( 87, 111 )
 
 [node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 7 )]
 position = Vector2( 1039, 21 )
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne6.tscn"
-
-[node name="mezar" type="Area2D" parent="seviye"]
-position = Vector2( 592, 98 )
-script = ExtResource( 10 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/mezar"]
-position = Vector2( 1, -12 )
-shape = SubResource( 2 )
-
-[node name="Icon" type="Sprite" parent="seviye/mezar"]
-position = Vector2( -17, -7.17107 )
-scale = Vector2( 3.36957, 3.17251 )
-texture = ExtResource( 9 )
-hframes = 14
-frame = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="seviye/mezar"]
-autoplay = "idle"
-anims/RESET = SubResource( 4 )
-anims/idle = SubResource( 5 )
-anims/sev = SubResource( 6 )
-
-[node name="Mezar" type="Sprite" parent="seviye/mezar"]
-position = Vector2( -29, -12 )
-scale = Vector2( 2.42308, 2.42308 )
-z_index = -2
-texture = ExtResource( 8 )
-hframes = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 11 )]
 visible = false
-
-[connection signal="body_entered" from="seviye/mezar" to="seviye/mezar" method="_on_mezar_body_entered"]
-[connection signal="body_exited" from="seviye/mezar" to="seviye/mezar" method="_on_mezar_body_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=1]
 [ext_resource path="res://varliklar/cizimler/press_keyboard.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://varliklar/paralax/fore2.png" type="Texture" id=11]
 [ext_resource path="res://varliklar/paralax/middle2.png" type="Texture" id=12]
 [ext_resource path="res://varliklar/paralax/fore.png" type="Texture" id=13]
+[ext_resource path="res://varliklar/cizimler/sag_ev.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=6]
 size = 32
@@ -245,7 +246,7 @@ scale = 2.0
 color = Color( 0.541176, 0.215686, 0.2, 1 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 528.5, 30 )
+extents = Vector2( 641, 30 )
 
 [node name="Sahne2" type="Node"]
 
@@ -322,11 +323,16 @@ texture = ExtResource( 12 )
 position = Vector2( -29, -353 )
 
 [node name="Alisa" parent="seviye" instance=ExtResource( 1 )]
-position = Vector2( 108, 448 )
+position = Vector2( -12, 414 )
 
 [node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 9 )]
 position = Vector2( 904, 367 )
 sonraki_sahne_yolu = "res://sahneler/oyun/Sahne3.tscn"
+
+[node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 9 )]
+position = Vector2( -163, 333 )
+gecis_izni = true
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne1_5.tscn"
 
 [node name="Cocuk" type="Area2D" parent="seviye"]
 position = Vector2( 654, 470 )
@@ -388,7 +394,7 @@ texture = ExtResource( 3 )
 position = Vector2( -21, 506 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin"]
-position = Vector2( 482.5, 9 )
+position = Vector2( 370, 9 )
 shape = SubResource( 1 )
 
 [node name="zemin2" type="StaticBody2D" parent="seviye/duvarlar"]
@@ -404,8 +410,20 @@ position = Vector2( -89, -2 )
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin3"]
-position = Vector2( 482.5, 9 )
+position = Vector2( 482.501, 235.998 )
 shape = SubResource( 1 )
+
+[node name="SagEv" type="Sprite" parent="seviye"]
+position = Vector2( -194, 350 )
+scale = Vector2( 4.3651, 4.3651 )
+texture = ExtResource( 14 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="seviye"]
+position = Vector2( -82, 442 )
+rotation = 0.581858
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="seviye/StaticBody2D"]
+polygon = PoolVector2Array( 81.0137, -4.21719, 74.6825, -12.022, 64.1076, -6.26256, 53.9293, -19.9155, 42.519, -13.6065, 36.4736, -22.7963, 25.8987, -17.0369, -69.3639, 49.2204 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

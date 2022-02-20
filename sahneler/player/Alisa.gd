@@ -9,6 +9,7 @@ var gravity = 980
 
 var hareket_izin = true
 var uzatti = false
+var mezar_is = false
 onready var anim_player = get_node("AnimationPlayer")
 
 func _hareket(carpan):
@@ -57,7 +58,8 @@ func _physics_process(delta):
 		_hareket(delta)
 	if Input.is_action_just_pressed("etkilesim") and uzatti == true:
 			_babaya_ayi_goster()
-	pass
+	if Input.is_action_just_pressed("etkilesim") and mezar_is == true:
+		pass
 
 
 func _ready():
@@ -98,16 +100,23 @@ func _babaya_ayi_goster():
 	
 	pass
 
+func mezardakine_cicek_ver():
+	hareket_izin = false
+
 var baba
 func _on_etkilesim_area_entered(area):
 	if area.is_in_group("Baba"):
 		uzatti = true
 		baba = area
+	if  area.is_in_group("mezar"):
+		mezar_is = true
 
 
 
 func _on_etkilesim_area_exited(area):
 	if area.is_in_group("Baba"):
 		uzatti = false
+	if  area.is_in_group("mezar"):
+		mezar_is = false
 
 

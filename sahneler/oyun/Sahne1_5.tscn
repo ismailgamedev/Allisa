@@ -62,6 +62,7 @@ texture = ExtResource( 3 )
 
 [node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 1 )]
 position = Vector2( 924, 361 )
+gecis_izni = true
 sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
 
 [node name="SabitCamera" type="Camera2D" parent="seviye"]

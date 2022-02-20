@@ -6,15 +6,7 @@ extends RigidBody2D
 # var b = "text"
 signal yere_dustu
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+onready var sahne_gecisi = get_parent().get_node("yeni_seviye_kapisi2")
 
 
 
@@ -23,4 +15,5 @@ func _on_Area2D_body_entered(body):
 		emit_signal("yere_dustu")
 		print("top_yerde")
 		$Particles2D.emitting = false
+		sahne_gecisi.gecis_izni = true
 	pass # Replace with function body.

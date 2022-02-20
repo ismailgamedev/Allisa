@@ -5,7 +5,7 @@ script/source = "extends Area2D
 
 
 # Sonraki Sahne yolu
-var gecis_izni = false
+export var gecis_izni = false
 export(String, FILE, \"*.tscn\") var sonraki_sahne_yolu
 
 onready var sahne_gecisi = get_node(\"../../CanvasLayer/Sahnegecisi\")

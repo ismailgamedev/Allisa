@@ -4,12 +4,18 @@ var kopuk_geldi = false
 var karakter_geldi = false
 var aldin = false
 
+onready var sahne_gecisi = get_parent().get_node("yeni_seviye_kapisi")
+
 func _process(delta):
 	if karakter_geldi == true and kopuk_geldi == true:
 		$Label.visible = true
 		if Input.is_action_just_pressed("etkilesim") and aldin == false: 
 			$AnimationPlayer.play("cicek_ver")
+			yield($AnimationPlayer,"animation_finished")
+			$AnimationPlayer.play("geri_don")
 			aldin = true
+			sahne_gecisi.gecis_izni = true
+			
 	else:
 		$Label.visible = false
 		
