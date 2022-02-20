@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://default_env.tres" type="Environment" id=1]
 [ext_resource path="res://depo/WorldEnvironmentt.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://sahneler/yagmur/Yagmur.tscn" type="PackedScene" id=4]
 [ext_resource path="res://varliklar/sesler/rain_ambient.mp3" type="AudioStream" id=5]
+[ext_resource path="res://varliklar/sesler/Calm-and-Peaceful.mp3" type="AudioStream" id=6]
 
 [sub_resource type="Animation" id=2]
 resource_name = "fade"
@@ -79,7 +80,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -4.546, -35.792 ]
+"values": [ -4.546, -80.0 ]
 }
 
 [sub_resource type="Shader" id=14]
@@ -156,3 +157,8 @@ texture = ExtResource( 3 )
 [node name="yagmur_sesi" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -4.546
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -27.279
+autoplay = true
