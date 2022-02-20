@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=1]
 [ext_resource path="res://varliklar/paralax/middle.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://varliklar/cizimler/man_and_dog.png" type="Texture" id=10]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sahneler/kopek/Adam.gd" type="Script" id=12]
+[ext_resource path="res://varliklar/cizimler/kamusal_oturma_alani.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 449.5, 24 )
@@ -57,7 +58,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=11]
 resource_name = "sev"
 length = 1.2
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -215,6 +215,11 @@ shape = SubResource( 4 )
 [node name="Alisa" parent="seviye" instance=ExtResource( 6 )]
 position = Vector2( 36, 97 )
 
+[node name="KamusalOturmaAlani" type="Sprite" parent="seviye"]
+position = Vector2( 469, 100 )
+scale = Vector2( 1.95, 1.95 )
+texture = ExtResource( 13 )
+
 [node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 8 )]
 position = Vector2( 862, 15 )
 
@@ -228,7 +233,7 @@ scale = Vector2( 2.07045, 2.25 )
 texture = ExtResource( 10 )
 hframes = 4
 vframes = 4
-frame = 1
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/Adam"]
 position = Vector2( 2, 0 )
