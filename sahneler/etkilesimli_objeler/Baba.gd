@@ -1,4 +1,4 @@
-extends Node
+extends Area2D
 
 
 # Declare member variables here. Examples:
@@ -14,3 +14,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_Baba_area_exited(area):
+	$Label.visible = false
+
+
+func _on_Baba_area_entered(area):
+	$Label.visible = true

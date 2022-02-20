@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Area2D
+
+
+# Sonraki Sahne yolu
+export(String, FILE, \"*.tscn\") var sonraki_sahne_yolu
+
+onready var sahne_gecisi = get_node(\"../../CanvasLayer/Sahnegecisi\")
+
+func _on_yeni_seviye_kapisi_area_entered(area):
+	sahne_gecisi.sahneye_git(sonraki_sahne_yolu)
+	pass # Replace with function body.
+"
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32.5, 115.5 )
+
+[node name="yeni_seviye_kapisi" type="Area2D"]
+script = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, -1 )
+shape = SubResource( 5 )
+
+[connection signal="area_entered" from="." to="." method="_on_yeni_seviye_kapisi_area_entered"]

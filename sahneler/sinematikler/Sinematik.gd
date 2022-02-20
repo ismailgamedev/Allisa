@@ -1,6 +1,6 @@
 extends Control
 
-export(String) var diger_sahne_path
+export(String, FILE, "*.tscn") var sonraki_sahne_yolu
 export(StreamTexture) var cizim_node_path
 
 onready var sahnegecisi = $CanvasLayer/Sahnegecisi
@@ -12,6 +12,6 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("diger_sinematik"):
-		print(str(diger_sahne_path))
-		sahnegecisi.sahneye_git(diger_sahne_path)
+		print(sonraki_sahne_yolu)
+		sahnegecisi.sahneye_git(sonraki_sahne_yolu)
 

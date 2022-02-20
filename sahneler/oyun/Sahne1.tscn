@@ -1,396 +1,93 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://sahneler/yagmur/Yagmur.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=2]
-[ext_resource path="res://varliklar/cizimler/aglak_bebe.png" type="Texture" id=3]
+[ext_resource path="res://varliklar/cizimler/baba_cry.png" type="Texture" id=3]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
-[ext_resource path="res://varliklar/sesler/rain_ambient.mp3" type="AudioStream" id=6]
-[ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://varliklar/cizimler/hug_v1.png" type="Texture" id=8]
+[ext_resource path="res://sahneler/etkilesimli_objeler/Baba.gd" type="Script" id=7]
+[ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://varliklar/cizimler/evearkaplan.png" type="Texture" id=9]
+[ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 50.5, 243 )
+extents = Vector2( 41.25, 97.5 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 548, 47 )
+extents = Vector2( 268.5, 48.5 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 40.5, 38 )
+
+[sub_resource type="DynamicFont" id=11]
 size = 32
-font_data = ExtResource( 7 )
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends Sprite
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-onready var label = get_node(\"../Label\")
-onready var anim_p = get_node(\"../AnimationPlayer\")
-onready var _hugg = get_node(\"../hug\")
-var icerde = false
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	anim_p.play(\"CRY\")
-	_hugg.visible = false
-	label.visible = false
-	pass # Replace with function body.
-
-func _physics_process(delta):
-	if Input.is_action_just_pressed(\"etkilesim\") and icerde == true:
-		anim_p.play(\"hug\")
-		print(\"etkilesti\")
-		pass
-	pass
-
-
-func _on_Area2D_area_entered(area):
-	label.visible = true
-	icerde = true
-	pass # Replace with function body.
-
-
-func _on_Area2D_area_exited(area):
-	label.visible = false
-	icerde = false
-	pass # Replace with function body.
-"
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 115.946
-
-[sub_resource type="Animation" id=13]
-resource_name = "CRY"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("CryKid:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 0 ]
-}
-
-[sub_resource type="Animation" id=12]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("hug:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Alisa:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("CryKid:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("hug:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("CryKid:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 1 ]
-}
-
-[sub_resource type="Animation" id=11]
-resource_name = "hug"
-length = 2.5
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("../Alisa:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 626, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../Alisa:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 443, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("CryKid:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Label:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("hug:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 2, 2.1, 2.2, 2.3, 2.4 )
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("../Alisa:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("hug:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="GDScript" id=6]
-script/source = "extends Area2D
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-onready var sahne_gecisi = get_node(\"../../CanvasLayer/Sahnegecisi\")
-func _on_yeni_seviye_kapisi_area_entered(area):
-	sahne_gecisi.sahneye_git()
-	pass # Replace with function body.
-"
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 32.5, 117 )
-
-[sub_resource type="Shader" id=7]
-code = "shader_type canvas_item;
-
-// Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
-// If you use this shader, I would prefer it if you gave credit to me and my channel
-
-uniform vec3 color = vec3(0.5, 0.5, 0.5);
-uniform int OCTAVES = 4;
-
-float rand(vec2 coord){
-	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
-}
-
-float noise(vec2 coord){
-	vec2 i = floor(coord);
-	vec2 f = fract(coord);
-
-	// 4 corners of a rectangle surrounding our point
-	float a = rand(i);
-	float b = rand(i + vec2(1.0, 0.0));
-	float c = rand(i + vec2(0.0, 1.0));
-	float d = rand(i + vec2(1.0, 1.0));
-
-	vec2 cubic = f * f * (3.0 - 2.0 * f);
-
-	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
-}
-
-float fbm(vec2 coord){
-	float value = 0.0;
-	float scale = 0.5;
-
-	for(int i = 0; i < OCTAVES; i++){
-		value += noise(coord) * scale;
-		coord *= 2.0;
-		scale *= 0.5;
-	}
-	return value;
-}
-
-void fragment() {
-	vec2 coord = UV * 20.0;
-
-	vec2 motion = vec2( fbm(coord + vec2(TIME * -0.5, TIME * 0.5)) );
-
-	float final = fbm(coord + motion);
-
-	COLOR = vec4(color, final * 0.5);
-}"
-
-[sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 7 )
-shader_param/color = Vector3( 0.5, 0.5, 0.5 )
-shader_param/OCTAVES = 4
+font_data = ExtResource( 8 )
 
 [node name="Sahne1" type="Node"]
 
 [node name="seviye" type="Node2D" parent="."]
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="seviye"]
+[node name="Evearkaplan" type="Sprite" parent="seviye"]
+position = Vector2( 622, 354 )
+scale = Vector2( 2.83333, 2.83333 )
+texture = ExtResource( 9 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/StaticBody2D2"]
-position = Vector2( 40.5, 233 )
+[node name="duvarlar" type="Node" parent="seviye"]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="seviye/duvarlar"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D2"]
+position = Vector2( 359.75, 383.5 )
 shape = SubResource( 9 )
 
-[node name="Alisa" parent="seviye" instance=ExtResource( 2 )]
-position = Vector2( 626, 443 )
-
-[node name="Particles2D" parent="seviye" instance=ExtResource( 1 )]
-position = Vector2( 871, 10 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="seviye"]
+[node name="StaticBody2D" type="StaticBody2D" parent="seviye/duvarlar"]
 position = Vector2( 3, 476 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/StaticBody2D"]
-position = Vector2( 538, 37 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D"]
+position = Vector2( 648.5, 53.5 )
 shape = SubResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="seviye"]
-position = Vector2( 655, 451 )
-scale = Vector2( 0.284616, 0.264286 )
+[node name="Alisa" parent="seviye" instance=ExtResource( 2 )]
+position = Vector2( 461, 448 )
 
-[node name="Label" type="Label" parent="seviye/Area2D"]
+[node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 10 )]
+position = Vector2( 929, 365 )
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne1_5.tscn"
+
+[node name="Baba" type="Area2D" parent="seviye" groups=["Baba"]]
+position = Vector2( 666, 432 )
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/Baba"]
+shape = SubResource( 10 )
+
+[node name="Label" type="Label" parent="seviye/Baba"]
 visible = false
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -91.3513
-margin_top = -132.432
-margin_right = 107.649
-margin_bottom = -102.432
-custom_fonts/font = SubResource( 10 )
-text = "\"E\" Cocuga Saril"
+margin_left = -35.0
+margin_top = -46.0
+margin_right = 174.0
+margin_bottom = -16.0
+rect_scale = Vector2( 0.325564, 0.325564 )
+custom_fonts/font = SubResource( 11 )
+text = "\"E\" Baba ile oyna"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CryKid" type="Sprite" parent="seviye/Area2D"]
-position = Vector2( -10.5405, -30.2704 )
-scale = Vector2( 11, 11 )
+[node name="BabaCry" type="Sprite" parent="seviye/Baba"]
+position = Vector2( 0, -4.99997 )
+scale = Vector2( 2.07812, 2.07812 )
 texture = ExtResource( 3 )
-hframes = 2
-frame = 1
-script = SubResource( 4 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/Area2D"]
-shape = SubResource( 3 )
-
-[node name="hug" type="Sprite" parent="seviye/Area2D"]
-position = Vector2( -14.054, -41.6217 )
-scale = Vector2( 11, 11 )
-texture = ExtResource( 8 )
-hframes = 6
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="seviye/Area2D"]
-anims/CRY = SubResource( 13 )
-anims/RESET = SubResource( 12 )
-anims/hug = SubResource( 11 )
-
-[node name="yeni_seviye_kapisi" type="Area2D" parent="seviye"]
-position = Vector2( 1023, 444 )
-script = SubResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/yeni_seviye_kapisi"]
-position = Vector2( 22.5, -97 )
-shape = SubResource( 5 )
-
-[node name="Sprite" type="Sprite" parent="seviye"]
-material = SubResource( 8 )
-position = Vector2( 808, -12 )
-scale = Vector2( 30, 30 )
-texture = ExtResource( 5 )
+[node name="SabitCamera" type="Camera2D" parent="seviye"]
+position = Vector2( 622, 354 )
+current = true
+zoom = Vector2( 0.57, 0.536 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 4 )]
 visible = false
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 548, 254 )
-stream = ExtResource( 6 )
-autoplay = true
-attenuation = 0.00257716
-
-[connection signal="area_entered" from="seviye/Area2D" to="seviye/Area2D/CryKid" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="seviye/Area2D" to="seviye/Area2D/CryKid" method="_on_Area2D_area_exited"]
-[connection signal="area_entered" from="seviye/yeni_seviye_kapisi" to="seviye/yeni_seviye_kapisi" method="_on_yeni_seviye_kapisi_area_entered"]
+[connection signal="area_entered" from="seviye/Baba" to="seviye/Baba" method="_on_Baba_area_entered"]
+[connection signal="area_exited" from="seviye/Baba" to="seviye/Baba" method="_on_Baba_area_exited"]
