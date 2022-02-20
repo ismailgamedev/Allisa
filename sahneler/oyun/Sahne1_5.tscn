@@ -61,10 +61,6 @@ scale = Vector2( 2.07812, 2.07812 )
 texture = ExtResource( 3 )
 
 [node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 1 )]
-position = Vector2( 383, 360 )
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne1.tscn"
-
-[node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 1 )]
 position = Vector2( 924, 361 )
 sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
 

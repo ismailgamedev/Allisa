@@ -5,12 +5,15 @@ script/source = "extends Area2D
 
 
 # Sonraki Sahne yolu
+var gecis_izni = false
 export(String, FILE, \"*.tscn\") var sonraki_sahne_yolu
 
 onready var sahne_gecisi = get_node(\"../../CanvasLayer/Sahnegecisi\")
 
 func _on_yeni_seviye_kapisi_area_entered(area):
-	sahne_gecisi.sahneye_git(sonraki_sahne_yolu)
+	if area.is_in_group(\"oyuncu\"):
+		if gecis_izni == true:
+			sahne_gecisi.sahneye_git(sonraki_sahne_yolu)
 	pass # Replace with function body.
 "
 

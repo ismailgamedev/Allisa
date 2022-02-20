@@ -38,6 +38,13 @@ texture = ExtResource( 9 )
 position = Vector2( 359.75, 383.5 )
 shape = SubResource( 9 )
 
+[node name="StaticBody2D3" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( 598, 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D3"]
+position = Vector2( 359.75, 383.5 )
+shape = SubResource( 9 )
+
 [node name="StaticBody2D" type="StaticBody2D" parent="seviye/duvarlar"]
 position = Vector2( 3, 476 )
 
