@@ -38,8 +38,10 @@ func _hareket(carpan):
 		if velocity.x == 0:
 			#anim_p.play("bekle")
 			$ziplama.visible = false
-			$yurume.visible = true
+			$idle.visible = true
+			$idle.set_flip_h(!$yurume.flip_h)
 			anim_player.play("idle")
+		
 	else:
 		$ziplama.visible = true
 		$yurume.visible = false
@@ -91,14 +93,16 @@ func _babaya_ayi_goster():
 	anim_player.play_backwards("babaya_ayi_goster_geri")
 	yield(get_tree().create_timer(1.7),"timeout")
 	anim_player.play("idle")
+	baba.oyuncak_goruldu = true
 	hareket_izin = true
 	
 	pass
 
-
+var baba
 func _on_etkilesim_area_entered(area):
 	if area.is_in_group("Baba"):
 		uzatti = true
+		baba = area
 
 
 

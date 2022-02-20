@@ -25,11 +25,15 @@ script/source = "extends Sprite
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
-
+var sarildi = false
 onready var label = get_node(\"../Label\")
 onready var anim_p = get_node(\"../AnimationPlayer\")
 onready var _hugg = get_node(\"../hug\")
 onready var kalpler = get_node(\"../kalp_particles\")
+
+
+onready var gecis_kapisi = get_node(\"../../yeni_seviye_kapisi\")
+
 
 var icerde = false
 # Called when the node enters the scene tree for the first time.
@@ -40,25 +44,29 @@ func _ready():
 	pass # Replace with function body.
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed(\"etkilesim\") and icerde == true:
+	if Input.is_action_just_pressed(\"etkilesim\") and icerde == true and sarildi == false:
 		anim_p.play(\"hug\")
 		yield(anim_p,\"animation_finished\")
 		$\"/root/We/AnimationPlayer\".play(\"fade\")
 		print(\"etkilesti\")
 		kalpler.emitting = true
+		sarildi = true
+		gecis_kapisi.gecis_izni = true
 		pass
 	pass
 
 
 func _on_Area2D_area_entered(area):
-	label.visible = true
-	icerde = true
+	if sarildi == false:
+		label.visible = true
+		icerde = true
 	pass # Replace with function body.
 
 
 func _on_Area2D_area_exited(area):
-	label.visible = false
-	icerde = false
+	if sarildi == false:
+		label.visible = false
+		icerde = false
 	pass # Replace with function body.
 
 
@@ -320,10 +328,6 @@ position = Vector2( 108, 448 )
 position = Vector2( 904, 367 )
 sonraki_sahne_yolu = "res://sahneler/oyun/Sahne3.tscn"
 
-[node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 9 )]
-position = Vector2( -35, 367 )
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne1_5.tscn"
-
 [node name="Cocuk" type="Area2D" parent="seviye"]
 position = Vector2( 654, 470 )
 scale = Vector2( 0.284616, 0.264286 )
@@ -384,6 +388,22 @@ texture = ExtResource( 3 )
 position = Vector2( -21, 506 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin"]
+position = Vector2( 482.5, 9 )
+shape = SubResource( 1 )
+
+[node name="zemin2" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( 980, -10 )
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin2"]
+position = Vector2( 482.5, 9 )
+shape = SubResource( 1 )
+
+[node name="zemin3" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( -89, -2 )
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin3"]
 position = Vector2( 482.5, 9 )
 shape = SubResource( 1 )
 

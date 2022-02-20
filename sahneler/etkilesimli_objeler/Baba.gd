@@ -1,24 +1,28 @@
 extends Area2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var izin_verildi = false
+var oyuncak_goruldu = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+onready var gecis_kapasi = get_node("../yeni_seviye_kapisi")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+func _physics_process(delta):
+	if oyuncak_goruldu == true and izin_verildi == false:
+		$Label.visible = false
+		gecis_kapasi.gecis_izni = true
+		izin_verildi = true
+		
+		pass
+	pass
 
 func _on_Baba_area_exited(area):
-	$Label.visible = false
+	if oyuncak_goruldu == false:
+		$Label.visible = false
 
 
 func _on_Baba_area_entered(area):
-	$Label.visible = true
+	if oyuncak_goruldu == false:
+		$Label.visible = true
