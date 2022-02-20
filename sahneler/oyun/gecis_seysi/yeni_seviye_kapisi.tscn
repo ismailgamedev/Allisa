@@ -8,6 +8,7 @@ script/source = "extends Area2D
 export(String, FILE, \"*.tscn\") var sonraki_sahne_yolu
 
 onready var sahne_gecisi = get_node(\"../../CanvasLayer/Sahnegecisi\")
+
 func _on_yeni_seviye_kapisi_area_entered(area):
 	sahne_gecisi.sahneye_git(sonraki_sahne_yolu)
 	pass # Replace with function body.

@@ -88,7 +88,6 @@ zoom = Vector2( 0.57, 0.536 )
 
 [node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 4 )]
 visible = false
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
 
 [connection signal="area_entered" from="seviye/Baba" to="seviye/Baba" method="_on_Baba_area_entered"]
 [connection signal="area_exited" from="seviye/Baba" to="seviye/Baba" method="_on_Baba_area_exited"]

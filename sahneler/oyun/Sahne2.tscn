@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=1]
 [ext_resource path="res://varliklar/cizimler/press_keyboard.png" type="Texture" id=2]
@@ -7,7 +7,12 @@
 [ext_resource path="res://varliklar/cizimler/aglak_bebe.png" type="Texture" id=5]
 [ext_resource path="res://varliklar/cizimler/hug_v1.png" type="Texture" id=6]
 [ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://varliklar/paralax/middle.png" type="Texture" id=8]
 [ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=9]
+[ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=10]
+[ext_resource path="res://varliklar/paralax/fore2.png" type="Texture" id=11]
+[ext_resource path="res://varliklar/paralax/middle2.png" type="Texture" id=12]
+[ext_resource path="res://varliklar/paralax/fore.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=6]
 size = 32
@@ -38,7 +43,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed(\"etkilesim\") and icerde == true:
 		anim_p.play(\"hug\")
 		yield(anim_p,\"animation_finished\")
-		$\"/root/GlobalWorldEnvironment/AnimationPlayer\".play(\"fade\")
+		$\"/root/We/AnimationPlayer\".play(\"fade\")
 		print(\"etkilesti\")
 		kalpler.emitting = true
 		pass
@@ -234,13 +239,83 @@ extents = Vector2( 528.5, 30 )
 
 [node name="Sahne2" type="Node"]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 1 )
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 10 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 10 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.8, 1 )
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 8 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 8 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 13 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 13 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 11 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 11 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 12 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 12 )
+
 [node name="seviye" type="Node2D" parent="."]
+position = Vector2( -29, -353 )
 
 [node name="Alisa" parent="seviye" instance=ExtResource( 1 )]
-position = Vector2( 108, 459 )
+position = Vector2( 108, 448 )
 
 [node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 9 )]
-position = Vector2( 1006, 367 )
+position = Vector2( 904, 367 )
 sonraki_sahne_yolu = "res://sahneler/oyun/Sahne3.tscn"
 
 [node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 9 )]
@@ -300,13 +375,13 @@ one_shot = true
 process_material = SubResource( 12 )
 texture = ExtResource( 3 )
 
-[node name="duvarlar" type="Node" parent="seviye"]
+[node name="duvarlar" type="Node2D" parent="seviye"]
 
 [node name="zemin" type="StaticBody2D" parent="seviye/duvarlar"]
-position = Vector2( 9, 495 )
+position = Vector2( -21, 506 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin"]
-position = Vector2( 482.5, 20 )
+position = Vector2( 482.5, 9 )
 shape = SubResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

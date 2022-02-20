@@ -18,11 +18,12 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GlobalWorldEnvironment="*res://depo/WorldEnvironment.tscn"
+We="*res://depo/WE.tscn"
 
 [display]
 
 window/stretch/mode="2d"
+window/stretch/aspect="expand"
 
 [input]
 

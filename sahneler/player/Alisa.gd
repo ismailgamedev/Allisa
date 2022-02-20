@@ -51,6 +51,7 @@ func _hareket(carpan):
 
 #######################################
 func _physics_process(delta):
+	print(get_tree().get_current_scene().get_name())
 	if hareket_izin ==true:
 		_hareket(delta)
 	if Input.is_action_just_pressed("etkilesim") and uzatti == true:
