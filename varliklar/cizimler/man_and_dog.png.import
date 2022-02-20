@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/kopke_anims.png-adbb5f1f5b9bc170026f994b107dfd05.stex"
+path="res://.import/man_and_dog.png-dfeddd5e794ce94fcd925b33ac74004e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://varliklar/cizimler/kopke_anims.png"
-dest_files=[ "res://.import/kopke_anims.png-adbb5f1f5b9bc170026f994b107dfd05.stex" ]
+source_file="res://varliklar/cizimler/man_and_dog.png"
+dest_files=[ "res://.import/man_and_dog.png-dfeddd5e794ce94fcd925b33ac74004e.stex" ]
 
 [params]
 
