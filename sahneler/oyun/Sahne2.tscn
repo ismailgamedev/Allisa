@@ -1,69 +1,11 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://varliklar/sesler/rain_ambient.mp3" type="AudioStream" id=3]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=4]
 [ext_resource path="res://varliklar/cizimler/aglak_bebe.png" type="Texture" id=5]
 [ext_resource path="res://varliklar/cizimler/hug_v1.png" type="Texture" id=6]
 [ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://sahneler/yagmur/Yagmur.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=9]
-
-[sub_resource type="Shader" id=14]
-code = "shader_type canvas_item;
-
-// Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
-// If you use this shader, I would prefer it if you gave credit to me and my channel
-
-uniform vec3 color = vec3(0.5, 0.5, 0.5);
-uniform int OCTAVES = 4;
-
-float rand(vec2 coord){
-	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
-}
-
-float noise(vec2 coord){
-	vec2 i = floor(coord);
-	vec2 f = fract(coord);
-
-	// 4 corners of a rectangle surrounding our point
-	float a = rand(i);
-	float b = rand(i + vec2(1.0, 0.0));
-	float c = rand(i + vec2(0.0, 1.0));
-	float d = rand(i + vec2(1.0, 1.0));
-
-	vec2 cubic = f * f * (3.0 - 2.0 * f);
-
-	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
-}
-
-float fbm(vec2 coord){
-	float value = 0.0;
-	float scale = 0.5;
-
-	for(int i = 0; i < OCTAVES; i++){
-		value += noise(coord) * scale;
-		coord *= 2.0;
-		scale *= 0.5;
-	}
-	return value;
-}
-
-void fragment() {
-	vec2 coord = UV * 20.0;
-
-	vec2 motion = vec2( fbm(coord + vec2(TIME * -0.5, TIME * 0.5)) );
-
-	float final = fbm(coord + motion);
-
-	COLOR = vec4(color, final * 0.5);
-}"
-
-[sub_resource type="ShaderMaterial" id=13]
-shader = SubResource( 14 )
-shader_param/color = Vector3( 0.5, 0.5, 0.5 )
-shader_param/OCTAVES = 4
 
 [sub_resource type="DynamicFont" id=6]
 size = 32
@@ -281,15 +223,6 @@ extents = Vector2( 528.5, 30 )
 
 [node name="seviye" type="Node2D" parent="."]
 
-[node name="yagmur" parent="seviye" instance=ExtResource( 8 )]
-position = Vector2( 871, 10 )
-
-[node name="sis" type="Sprite" parent="seviye"]
-material = SubResource( 13 )
-position = Vector2( 808, -12 )
-scale = Vector2( 30, 30 )
-texture = ExtResource( 2 )
-
 [node name="Alisa" parent="seviye" instance=ExtResource( 1 )]
 position = Vector2( 108, 459 )
 
@@ -306,7 +239,6 @@ position = Vector2( 654, 470 )
 scale = Vector2( 0.284616, 0.264286 )
 
 [node name="Label" type="Label" parent="seviye/Cocuk"]
-visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -91.3513
@@ -355,13 +287,6 @@ shape = SubResource( 1 )
 [node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 4 )]
 visible = false
 sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
-
-[node name="yagmur_sesi" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 548, 254 )
-stream = ExtResource( 3 )
-volume_db = -4.546
-autoplay = true
-attenuation = 0.00257716
 
 [connection signal="area_entered" from="seviye/Cocuk" to="seviye/Cocuk/CryKid" method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="seviye/Cocuk" to="seviye/Cocuk/CryKid" method="_on_Area2D_area_exited"]
