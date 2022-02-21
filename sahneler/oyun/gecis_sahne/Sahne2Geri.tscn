@@ -13,7 +13,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 641, 30 )
 
-[node name="Sahne2" type="Node"]
+[node name="Sahne32" type="Node"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -93,7 +93,7 @@ position = Vector2( 898.63, 452.043 )
 [node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 9 )]
 position = Vector2( -163, 333 )
 gecis_izni = true
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne1_5Geri.tscn"
+sonraki_sahne_yolu = "res://sahneler/oyun/gecis_sahne/Sahne1_5Geri.tscn"
 
 [node name="duvarlar" type="Node2D" parent="seviye"]
 
