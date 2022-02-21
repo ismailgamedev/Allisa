@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://varliklar/cizimler/karakter_jump.png" type="Texture" id=1]
 [ext_resource path="res://sahneler/player/Alisa.gd" type="Script" id=2]
 [ext_resource path="res://sahneler/player/karakter_walk.png" type="Texture" id=3]
 [ext_resource path="res://sahneler/player/dad_interact.png" type="Texture" id=4]
 [ext_resource path="res://sahneler/player/karakter_idle.png" type="Texture" id=5]
+[ext_resource path="res://varliklar/cizimler/fotover.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 23.5 )
@@ -83,6 +84,18 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("fotover:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=32]
@@ -175,6 +188,71 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "foto_ver"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "hareket_izni"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("fotover:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("idle:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("yurume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("fotover:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -332,6 +410,7 @@ smoothing_enabled = true
 anims/RESET = SubResource( 30 )
 anims/babaya_ayi_goster = SubResource( 32 )
 anims/babaya_ayi_goster_geri = SubResource( 34 )
+anims/foto_ver = SubResource( 35 )
 anims/idle = SubResource( 31 )
 anims/jump = SubResource( 33 )
 anims/walk = SubResource( 29 )
@@ -353,6 +432,7 @@ hframes = 11
 frame = 2
 
 [node name="ziplama" type="Sprite" parent="."]
+visible = false
 position = Vector2( -6, -5 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -367,6 +447,12 @@ offset = Vector2( -0.304849, 1.23839 )
 flip_v = true
 hframes = 5
 frame = 1
+
+[node name="fotover" type="Sprite" parent="."]
+position = Vector2( 5, -8 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
+hframes = 2
 
 [connection signal="area_entered" from="etkilesim" to="." method="_on_etkilesim_area_entered"]
 [connection signal="area_exited" from="etkilesim" to="." method="_on_etkilesim_area_exited"]

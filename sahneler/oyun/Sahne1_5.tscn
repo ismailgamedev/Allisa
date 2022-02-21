@@ -62,7 +62,6 @@ texture = ExtResource( 3 )
 
 [node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 1 )]
 position = Vector2( 924, 361 )
-gecis_izni = true
 sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"
 
 [node name="SabitCamera" type="Camera2D" parent="seviye"]
@@ -76,6 +75,13 @@ zoom = Vector2( 0.57, 0.536 )
 position = Vector2( -53, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D2"]
+position = Vector2( 359.75, 383.5 )
+shape = SubResource( 9 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( 590, -4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D3"]
 position = Vector2( 359.75, 383.5 )
 shape = SubResource( 9 )
 

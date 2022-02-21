@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=1]
 [ext_resource path="res://varliklar/paralax/middle.png" type="Texture" id=2]
@@ -11,9 +11,13 @@
 [ext_resource path="res://varliklar/cizimler/mezarkadin_anim.png" type="Texture" id=9]
 [ext_resource path="res://sahneler/oyun/mezar.gd" type="Script" id=10]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=11]
+[ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 544.5, 25.5 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 12 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 49.0408
@@ -173,6 +177,19 @@ sonraki_sahne_yolu = "res://sahneler/oyun/Sahne6.tscn"
 [node name="mezar" type="Area2D" parent="seviye"]
 position = Vector2( 592, 98 )
 script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="seviye/mezar"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -62.0
+margin_top = -64.0
+margin_right = 66.0
+margin_bottom = -50.0
+custom_fonts/font = SubResource( 7 )
+text = "\"E\" Adama cicek ver"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/mezar"]
 position = Vector2( 1, -12 )

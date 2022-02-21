@@ -7,7 +7,7 @@ var aldin = false
 onready var sahne_gecisi = get_parent().get_node("yeni_seviye_kapisi")
 
 func _process(delta):
-	if karakter_geldi == true and kopuk_geldi == true:
+	if karakter_geldi == true and kopuk_geldi == true and aldin == false:
 		$Label.visible = true
 		if Input.is_action_just_pressed("etkilesim") and aldin == false: 
 			$AnimationPlayer.play("cicek_ver")

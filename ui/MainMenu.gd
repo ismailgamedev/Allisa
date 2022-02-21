@@ -13,3 +13,6 @@ func _on_HakkindaBtn_pressed():
 func _on_CikBtn_pressed():
 	get_tree().quit()
 
+func _ready():
+	$BG.rect_size = Vector2(1024,600)
+	pass
