@@ -117,7 +117,7 @@ position = Vector2( 1034.84, 111 )
 [node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 7 )]
 position = Vector2( 42.4025, 21 )
 gecis_izni = true
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne4Geri.tscn"
+sonraki_sahne_yolu = "res://sahneler/oyun/gecis_sahne/Sahne4Geri.tscn"
 
 [node name="Mezar" type="Sprite" parent="seviye"]
 position = Vector2( 563, 86 )

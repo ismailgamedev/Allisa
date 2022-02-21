@@ -125,7 +125,7 @@ texture = ExtResource( 13 )
 [node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 8 )]
 position = Vector2( -175.666, 15 )
 gecis_izni = true
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne3Geri.tscn"
+sonraki_sahne_yolu = "res://sahneler/oyun/gecis_sahne/Sahne3Geri.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

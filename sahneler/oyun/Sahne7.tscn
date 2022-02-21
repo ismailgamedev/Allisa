@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=1]
 [ext_resource path="res://varliklar/paralax/middle.png" type="Texture" id=2]
@@ -8,12 +8,13 @@
 [ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sahneler/oyun/Tabela.gd" type="Script" id=7]
 [ext_resource path="res://varliklar/cizimler/tabela.png" type="Texture" id=8]
+[ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=9]
 [ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=11]
 [ext_resource path="res://varliklar/cizimler/kagt.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 280.445, 25.5 )
+extents = Vector2( 319.215, 25.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 33.0005, 34.6357 )
@@ -101,7 +102,7 @@ texture = ExtResource( 4 )
 position = Vector2( -6, 146 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin"]
-position = Vector2( 234.455, 15.5 )
+position = Vector2( 195.685, 15.5 )
 shape = SubResource( 1 )
 
 [node name="sol" type="StaticBody2D" parent="seviye/duvarlar"]
@@ -109,7 +110,7 @@ position = Vector2( -12, -710 )
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/sol"]
-position = Vector2( 570.491, 15.5 )
+position = Vector2( 616.741, 146.698 )
 shape = SubResource( 1 )
 
 [node name="sag" type="StaticBody2D" parent="seviye/duvarlar"]
@@ -148,6 +149,11 @@ text = "\"E\" Tabelayi oku"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 9 )]
+position = Vector2( -97.8316, 17.6989 )
+gecis_izni = true
+sonraki_sahne_yolu = "res://sahneler/oyun/gecis_sahne/Sahne5Geri.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
