@@ -1,0 +1,178 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=1]
+[ext_resource path="res://varliklar/paralax/middle.png" type="Texture" id=2]
+[ext_resource path="res://varliklar/paralax/fore2.png" type="Texture" id=3]
+[ext_resource path="res://varliklar/paralax/middle2.png" type="Texture" id=4]
+[ext_resource path="res://varliklar/paralax/fore.png" type="Texture" id=5]
+[ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sahneler/oyun/Tabela.gd" type="Script" id=7]
+[ext_resource path="res://varliklar/cizimler/tabela.png" type="Texture" id=8]
+[ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=11]
+[ext_resource path="res://varliklar/cizimler/kagt.png" type="Texture" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 280.445, 25.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 33.0005, 34.6357 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 10 )
+
+[node name="Sahne7" type="Node" groups=["ayisis"]]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 1 )
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 1 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 1 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.8, 1 )
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 2 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 2 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 5 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 5 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 3 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 3 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 4 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 4 )
+
+[node name="seviye" type="Node2D" parent="."]
+
+[node name="duvarlar" type="Node2D" parent="seviye"]
+
+[node name="zemin" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( -6, 146 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin"]
+position = Vector2( 234.455, 15.5 )
+shape = SubResource( 1 )
+
+[node name="sol" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( -12, -710 )
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/sol"]
+position = Vector2( 570.491, 15.5 )
+shape = SubResource( 1 )
+
+[node name="sag" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( 1113, -699 )
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/sag"]
+position = Vector2( 699.316, 608.829 )
+shape = SubResource( 1 )
+
+[node name="Alisa" parent="seviye" instance=ExtResource( 6 )]
+position = Vector2( 294.141, 111 )
+
+[node name="Tabela" type="Area2D" parent="seviye"]
+script = ExtResource( 7 )
+
+[node name="Tabela" type="Sprite" parent="seviye/Tabela"]
+position = Vector2( 53.7427, 107.509 )
+scale = Vector2( 1.58822, 1.58822 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/Tabela"]
+position = Vector2( 55.7799, 95.871 )
+shape = SubResource( 2 )
+
+[node name="Label" type="Label" parent="seviye/Tabela"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 22.0196
+margin_top = 76.2669
+margin_right = 221.02
+margin_bottom = 106.267
+rect_scale = Vector2( 0.326466, 0.326466 )
+custom_fonts/font = SubResource( 3 )
+text = "\"E\" Tabelayi oku"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 11 )]
+visible = false
+
+[node name="Harita" type="Control" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Harita"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -253.0
+margin_top = -224.5
+margin_right = 253.0
+margin_bottom = 224.5
+texture = ExtResource( 12 )
+expand = true
+
+[connection signal="body_entered" from="seviye/Tabela" to="seviye/Tabela" method="_on_Tabela_body_entered"]
+[connection signal="body_exited" from="seviye/Tabela" to="seviye/Tabela" method="_on_Tabela_body_exited"]

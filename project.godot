@@ -21,6 +21,7 @@ We="*res://depo/WE.tscn"
 
 [display]
 
+window/size/fullscreen=true
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 

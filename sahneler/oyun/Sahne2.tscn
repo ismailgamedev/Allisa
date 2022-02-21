@@ -339,6 +339,7 @@ position = Vector2( 654, 470 )
 scale = Vector2( 0.284616, 0.264286 )
 
 [node name="Label" type="Label" parent="seviye/Cocuk"]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -91.3513

@@ -11,7 +11,9 @@ var hareket_izin = true
 var uzatti = false
 var mezar_is = false
 onready var anim_player = get_node("AnimationPlayer")
-
+onready var ziplama_ayisis_texture = preload("res://varliklar/cizimler/aysz_jump.png")
+onready var idle_ayisis_texture = preload("res://varliklar/cizimler/ayisiz_idle.png")
+onready var walk_ayisi_texture = preload("res://varliklar/cizimler/ayisiz_walk.png")
 
 func _hareket(carpan):
 	velocity.x = 0
@@ -68,7 +70,10 @@ func _physics_process(delta):
 func _ready():
 	#_babaya_ayi_goster()
 	etkilesim_blogu.connect("area_entered",self,"_etkilesim")
-	pass
+	if get_tree().get_current_scene().is_in_group("ayisis"):
+		$ziplama.texture = ziplama_ayisis_texture
+		$idle.texture = idle_ayisis_texture
+		$yurume.texture = walk_ayisi_texture
 #######################################
 
 
