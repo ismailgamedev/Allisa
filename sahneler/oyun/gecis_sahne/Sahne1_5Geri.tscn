@@ -1,0 +1,117 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://sahneler/oyun/gecis_sahne/ikinci_kata_git.gd" type="Script" id=1]
+[ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sahneler/oyun/gecis_sahne/Babanin Yanina Git.gd" type="Script" id=3]
+[ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=4]
+[ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://varliklar/cizimler/evesahne2.png" type="Texture" id=9]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 41.25, 97.5 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 285, 50 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 70.079, 41.0463 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 32
+font_data = ExtResource( 8 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 61.9472, 69.4549 )
+
+[node name="Sahne1_5" type="Node"]
+
+[node name="seviye" type="Node2D" parent="."]
+
+[node name="Evearkaplan" type="Sprite" parent="seviye"]
+position = Vector2( 622, 354 )
+scale = Vector2( 2.83333, 2.83333 )
+texture = ExtResource( 9 )
+
+[node name="Alisa" parent="seviye" instance=ExtResource( 2 )]
+position = Vector2( 859.076, 448 )
+
+[node name="SabitCamera" type="Camera2D" parent="seviye"]
+position = Vector2( 622, 354 )
+current = true
+zoom = Vector2( 0.57, 0.536 )
+
+[node name="duvarlar" type="Node" parent="seviye"]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( -53, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D2"]
+position = Vector2( 359.75, 383.5 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D2"]
+position = Vector2( 987.427, 383.5 )
+shape = SubResource( 9 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( 3, 476 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D"]
+position = Vector2( 632, 52 )
+shape = SubResource( 1 )
+
+[node name="ikinci_kata_git" type="Area2D" parent="seviye"]
+position = Vector2( 723.483, 383.766 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/ikinci_kata_git"]
+position = Vector2( 2.17267, 46.8865 )
+shape = SubResource( 10 )
+
+[node name="Label" type="Label" parent="seviye/ikinci_kata_git"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -44.5459
+margin_top = -9.47308
+margin_right = 179.454
+margin_bottom = 20.5269
+rect_scale = Vector2( 0.325564, 0.325564 )
+custom_fonts/font = SubResource( 11 )
+text = "\"E\" Ikinci kata cik"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Babanin Yanina Git" type="Area2D" parent="seviye"]
+position = Vector2( 386.989, 456.835 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/Babanin Yanina Git"]
+position = Vector2( 99.2756, -52.29 )
+shape = SubResource( 12 )
+
+[node name="Label" type="Label" parent="seviye/Babanin Yanina Git"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 70.6981
+margin_top = -83.1566
+margin_right = 340.698
+margin_bottom = -53.1566
+rect_scale = Vector2( 0.325564, 0.325564 )
+custom_fonts/font = SubResource( 11 )
+text = "\"E\" Babanin yanina git"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
+
+[connection signal="body_entered" from="seviye/ikinci_kata_git" to="seviye/ikinci_kata_git" method="_on_ikinci_kata_git_body_entered"]
+[connection signal="body_exited" from="seviye/ikinci_kata_git" to="seviye/ikinci_kata_git" method="_on_ikinci_kata_git_body_exited"]
+[connection signal="body_entered" from="seviye/Babanin Yanina Git" to="seviye/Babanin Yanina Git" method="_on_Babanin_Yanina_Git_body_entered"]
+[connection signal="body_exited" from="seviye/Babanin Yanina Git" to="seviye/Babanin Yanina Git" method="_on_Babanin_Yanina_Git_body_exited"]

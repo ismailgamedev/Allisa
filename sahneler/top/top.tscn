@@ -16,7 +16,7 @@ radius = 17.0
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0.0310026, 0.43865 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=10]
+[sub_resource type="CurveTexture" id=12]
 curve = SubResource( 9 )
 
 [sub_resource type="ParticlesMaterial" id=11]
@@ -25,7 +25,7 @@ gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.12
-scale_curve = SubResource( 10 )
+scale_curve = SubResource( 12 )
 color = Color( 1, 1, 1, 0.215686 )
 
 [node name="top" type="RigidBody2D"]

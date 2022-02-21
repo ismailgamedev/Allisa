@@ -1,0 +1,231 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=1]
+[ext_resource path="res://varliklar/cizimler/dalszagac.png" type="Texture" id=2]
+[ext_resource path="res://varliklar/cizimler/dal.png" type="Texture" id=3]
+[ext_resource path="res://sahneler/oyun/gecis_seysi/yeni_seviye_kapisi.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=7]
+[ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=9]
+[ext_resource path="res://varliklar/paralax/middle.png" type="Texture" id=10]
+[ext_resource path="res://varliklar/paralax/fore2.png" type="Texture" id=11]
+[ext_resource path="res://varliklar/paralax/middle2.png" type="Texture" id=12]
+[ext_resource path="res://varliklar/paralax/fore.png" type="Texture" id=13]
+[ext_resource path="res://varliklar/cizimler/salncak.png" type="Texture" id=14]
+[ext_resource path="res://varliklar/cizimler/ip_parcacigi.png" type="Texture" id=15]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 614.813, 30 )
+
+[sub_resource type="CircleShape2D" id=14]
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 40.5, 12.5 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 93.5, 10 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 38, 10 )
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 151, 27.9996 )
+
+[node name="Sahne3" type="Node"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 1 )
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 9 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 9 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.8, 1 )
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 10 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 10 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 13 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 13 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 11 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 11 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2( 599.026, 0 )
+motion_mirroring = Vector2( 599.026, 0 )
+
+[node name="Fore" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 12 )
+
+[node name="Fore2" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 1198.05, 0 )
+scale = Vector2( 2.88, 2.787 )
+texture = ExtResource( 12 )
+
+[node name="seviye" type="Node2D" parent="."]
+
+[node name="Alisa" parent="seviye" instance=ExtResource( 1 )]
+position = Vector2( 1077, 104 )
+
+[node name="yeni_seviye_kapisi" parent="seviye" instance=ExtResource( 5 )]
+position = Vector2( -25, 8 )
+gecis_izni = true
+sonraki_sahne_yolu = "res://sahneler/oyun/gecis_sahne/Sahne2Geri.tscn"
+
+[node name="zemin" type="StaticBody2D" parent="seviye" groups=["zemin"]]
+position = Vector2( 1, 143 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/zemin"]
+position = Vector2( 506.125, 20 )
+shape = SubResource( 1 )
+
+[node name="zemin2" type="StaticBody2D" parent="seviye"]
+position = Vector2( -24, -175 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/zemin2"]
+position = Vector2( 466.188, 20 )
+shape = SubResource( 1 )
+
+[node name="agac" type="Node2D" parent="seviye"]
+
+[node name="dal_rigid" type="RigidBody2D" parent="seviye/agac"]
+position = Vector2( 581, -67 )
+
+[node name="Dal" type="Sprite" parent="seviye/agac/dal_rigid"]
+scale = Vector2( 3, 3 )
+z_index = -2
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="seviye/agac/dal_rigid"]
+polygon = PoolVector2Array( -45, -11, -30, -12, -2, -4, 31, -14, 47, -3, 42, 15, 16, 12, -30, 13, -50, 14, -49, -4 )
+
+[node name="dal_kok" type="StaticBody2D" parent="seviye/agac"]
+position = Vector2( 626, -101 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/dal_kok"]
+shape = SubResource( 14 )
+
+[node name="dal_kok2" type="StaticBody2D" parent="seviye/agac"]
+position = Vector2( 648, -65 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/dal_kok2"]
+shape = SubResource( 14 )
+
+[node name="dal_agac_pin" type="DampedSpringJoint2D" parent="seviye/agac"]
+position = Vector2( 625, -101 )
+rotation = 1.18755
+node_a = NodePath("../dal_kok")
+node_b = NodePath("../dal_rigid")
+stiffness = 64.0
+
+[node name="dal_pin_join" type="PinJoint2D" parent="seviye/agac"]
+position = Vector2( 633, -66 )
+node_a = NodePath("../dal_kok2")
+node_b = NodePath("../dal_rigid")
+
+[node name="Dalszagac" type="Sprite" parent="seviye/agac"]
+position = Vector2( 699, -36 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="salincak" type="RigidBody2D" parent="seviye/agac"]
+position = Vector2( 571, -9 )
+
+[node name="IpParcacigi" type="Sprite" parent="seviye/agac/salincak"]
+position = Vector2( -17, -13 )
+rotation = 0.391162
+scale = Vector2( 2, 13.709 )
+texture = ExtResource( 15 )
+
+[node name="IpParcacigi2" type="Sprite" parent="seviye/agac/salincak"]
+position = Vector2( 12, -15 )
+rotation = -0.390954
+scale = Vector2( 2, 13.709 )
+texture = ExtResource( 15 )
+
+[node name="Salncak" type="Sprite" parent="seviye/agac/salincak"]
+position = Vector2( 1, 9.53674e-07 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/salincak"]
+position = Vector2( 0, 28 )
+shape = SubResource( 15 )
+
+[node name="salinck_dal_pin" type="PinJoint2D" parent="seviye/agac"]
+position = Vector2( 575, -55 )
+node_a = NodePath("../dal_rigid")
+node_b = NodePath("../salincak")
+
+[node name="sinirlayici" type="StaticBody2D" parent="seviye/agac"]
+position = Vector2( 574, -156 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/agac/sinirlayici"]
+position = Vector2( 30, 7 )
+shape = SubResource( 16 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="seviye/agac/sinirlayici"]
+position = Vector2( 63, 36 )
+rotation = 2.04902
+shape = SubResource( 17 )
+
+[node name="zemin3" type="StaticBody2D" parent="seviye"]
+position = Vector2( 1409, -59 )
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/zemin3"]
+position = Vector2( 83.0009, 255 )
+shape = SubResource( 18 )
+
+[node name="zemin4" type="StaticBody2D" parent="seviye"]
+position = Vector2( -72, -59 )
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/zemin4"]
+position = Vector2( 83.0001, 17.9996 )
+shape = SubResource( 18 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 7 )]
+visible = false
+sonraki_sahne_yolu = "res://sahneler/oyun/Sahne2.tscn"

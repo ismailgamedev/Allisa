@@ -1,5 +1,6 @@
 extends WorldEnvironment
 
+var resim_elinde = false
 
 func _process(delta):
 	if get_tree().get_current_scene().get_name() == "Sahne2":

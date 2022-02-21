@@ -1,0 +1,148 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://sahneler/player/Alisa.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=2]
+[ext_resource path="res://varliklar/font/dpcomic.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://varliklar/cizimler/ikincikat.png" type="Texture" id=4]
+[ext_resource path="res://sahneler/oyun/gecis_sahne/altkatain.gd" type="Script" id=5]
+[ext_resource path="res://sahneler/oyun/gecis_sahne/resimalma.gd" type="Script" id=6]
+[ext_resource path="res://varliklar/cizimler/resim.png" type="Texture" id=7]
+[ext_resource path="res://sahneler/etkilesimli_objeler/circle_03.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 83.0485, 97.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 285, 48.7738 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 75.7264, 95.7716 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 22.2487, 15.4404 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0.0310026, 0.43865 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.12
+scale_curve = SubResource( 10 )
+color = Color( 1, 1, 1, 0.215686 )
+
+[node name="UstKat" type="Node"]
+
+[node name="seviye" type="Node2D" parent="."]
+
+[node name="Evearkaplan" type="Sprite" parent="seviye"]
+position = Vector2( 622, 354 )
+scale = Vector2( 2.83333, 2.83333 )
+texture = ExtResource( 4 )
+
+[node name="Alisa" parent="seviye" instance=ExtResource( 1 )]
+position = Vector2( 591.154, 438.808 )
+
+[node name="SabitCamera" type="Camera2D" parent="seviye"]
+position = Vector2( 622, 354 )
+current = true
+zoom = Vector2( 0.57, 0.536 )
+
+[node name="duvarlar" type="Node" parent="seviye"]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( -53, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D2"]
+position = Vector2( 489.058, 383.5 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D2"]
+position = Vector2( 1020.25, 383.5 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="seviye/duvarlar"]
+position = Vector2( 3, 476 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/StaticBody2D"]
+position = Vector2( 632, 53.2262 )
+shape = SubResource( 2 )
+
+[node name="altkatain" type="Area2D" parent="seviye"]
+position = Vector2( 527.613, 269.104 )
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/altkatain"]
+position = Vector2( 78.8595, 107.863 )
+shape = SubResource( 4 )
+
+[node name="Label" type="Label" parent="seviye/altkatain"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 40.1179
+margin_top = 113.962
+margin_right = 264.118
+margin_bottom = 143.962
+rect_scale = Vector2( 0.325564, 0.325564 )
+custom_fonts/font = SubResource( 3 )
+text = "\"E\" Alt kata in"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="resimalma" type="Area2D" parent="seviye"]
+position = Vector2( 765.402, 461.434 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/resimalma"]
+position = Vector2( 43.244, 0.537415 )
+shape = SubResource( 5 )
+
+[node name="Label" type="Label" parent="seviye/resimalma"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 18.493
+margin_top = -16.1942
+margin_right = 162.493
+margin_bottom = 13.8058
+rect_scale = Vector2( 0.325564, 0.325564 )
+custom_fonts/font = SubResource( 3 )
+text = "\"E\" Resmi al"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resim" type="Sprite" parent="seviye/resimalma"]
+position = Vector2( 43.3277, 3.62352 )
+scale = Vector2( 1.5874, 1.5874 )
+texture = ExtResource( 7 )
+flip_h = true
+
+[node name="Particles2D" type="Particles2D" parent="seviye/resimalma"]
+position = Vector2( 42.0024, 4.48343 )
+z_index = 1
+amount = 2
+speed_scale = 0.3
+process_material = SubResource( 12 )
+texture = ExtResource( 8 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 2 )]
+visible = false
+
+[connection signal="body_entered" from="seviye/altkatain" to="seviye/altkatain" method="_on_altkatain_body_entered"]
+[connection signal="body_exited" from="seviye/altkatain" to="seviye/altkatain" method="_on_altkatain_body_exited"]
+[connection signal="body_entered" from="seviye/resimalma" to="seviye/resimalma" method="_on_resimalma_body_entered"]
+[connection signal="body_exited" from="seviye/resimalma" to="seviye/resimalma" method="_on_resimalma_body_exited"]
