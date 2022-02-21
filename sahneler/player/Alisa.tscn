@@ -449,7 +449,6 @@ hframes = 5
 frame = 1
 
 [node name="fotover" type="Sprite" parent="."]
-visible = false
 position = Vector2( 5, -8 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 6 )

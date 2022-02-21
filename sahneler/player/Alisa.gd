@@ -128,3 +128,7 @@ func _on_etkilesim_area_exited(area):
 		mezar_is = false
 
 
+
+func _resim_goster():
+	anim_player.play("foto_ver")
+	pass

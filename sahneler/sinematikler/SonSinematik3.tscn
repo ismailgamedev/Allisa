@@ -32,3 +32,4 @@ __meta__ = {
 
 [node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 1 )]
 visible = false
+sonraki_sahne_yolu = "res://sahneler/oyun/magarajam_son.tscn"

@@ -6,10 +6,13 @@ func _process(delta):
 	if icinde == true:
 		if Input.is_action_just_pressed("etkilesim") and We.resim_elinde == true:
 			print("OLdu")
-			yield(get_tree().create_timer(1),"timeout")
-			get_node("/root/Sahne1_5/CanvasLayer/Sahnegecisi").sahneye_git("res://sahneler/sinematikler/SonSinematik1.tscn")
-
+			govde._resim_goster()
+			print(govde)
+			yield(get_tree().create_timer(1.5),"timeout")
+			get_node("../../CanvasLayer/Sahnegecisi").sahneye_git("res://sahneler/sinematikler/SonSinematik1.tscn")
+var govde
 func _on_Baba_body_entered(body):
+	govde = body
 	$Label.visible = true
 	icinde = true
 
