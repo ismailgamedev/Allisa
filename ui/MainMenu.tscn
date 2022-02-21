@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://ui/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=8]
 [ext_resource path="res://varliklar/paralax/fore2.png" type="Texture" id=9]
 [ext_resource path="res://sahneler/player/karakter_walk.png" type="Texture" id=10]
+[ext_resource path="res://varliklar/cizimler/ALISAHEAD.png" type="Texture" id=11]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -282,6 +283,17 @@ region_rect = Rect2( 64, 0, 0, 0 )
 autoplay = "walk"
 anims/RESET = SubResource( 3 )
 anims/walk = SubResource( 4 )
+
+[node name="icon" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -35.0
+margin_top = 66.0
+margin_right = 480.0
+margin_bottom = 276.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 5
 
 [connection signal="pressed" from="BtnCont/OynaBtn" to="." method="_on_OynaBtn_pressed"]
 [connection signal="pressed" from="BtnCont/HakkindaBtn" to="." method="_on_HakkindaBtn_pressed"]
