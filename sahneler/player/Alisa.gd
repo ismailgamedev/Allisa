@@ -12,6 +12,7 @@ var uzatti = false
 var mezar_is = false
 onready var anim_player = get_node("AnimationPlayer")
 
+
 func _hareket(carpan):
 	velocity.x = 0
 	velocity.y += gravity *carpan
@@ -51,10 +52,12 @@ func _hareket(carpan):
 	pass
 
 
+func hareket_izni(degeri : bool):
+	hareket_izin = degeri
 
 #######################################
 func _physics_process(delta):
-	if hareket_izin ==true:
+	if hareket_izin == true:
 		_hareket(delta)
 	if Input.is_action_just_pressed("etkilesim") and uzatti == true:
 			_babaya_ayi_goster()

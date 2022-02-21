@@ -1,8 +1,79 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ui/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://sahneler/sahne_gecis_sahnesi/Sahnegecisi.tscn" type="PackedScene" id=2]
 [ext_resource path="res://varliklar/font/new_dynamicfont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://varliklar/btncizim.tres" type="StyleBox" id=4]
+[ext_resource path="res://varliklar/paralax/middle2.png" type="Texture" id=5]
+[ext_resource path="res://varliklar/paralax/fore.png" type="Texture" id=6]
+[ext_resource path="res://varliklar/paralax/middle.png" type="Texture" id=7]
+[ext_resource path="res://varliklar/paralax/sky.png" type="Texture" id=8]
+[ext_resource path="res://varliklar/paralax/fore2.png" type="Texture" id=9]
+[ext_resource path="res://sahneler/player/karakter_walk.png" type="Texture" id=10]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1024, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "arka_plam"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1023.05, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "walk"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -12,18 +83,138 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="BG" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1024.0
+margin_right = 1024.0
+margin_bottom = 1200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="BG"]
+modulate = Color( 0.917647, 0.901961, 0.890196, 0.890196 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BtnCont" type="VBoxContainer" parent="."]
-anchor_right = 0.277
+[node name="Background" type="TextureRect" parent="BG/Control"]
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 43.0
-margin_right = 43.352
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background5" type="TextureRect" parent="BG/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background3" type="TextureRect" parent="BG/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background2" type="TextureRect" parent="BG/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background4" type="TextureRect" parent="BG/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="Control" parent="BG"]
+modulate = Color( 0.917647, 0.901961, 0.890196, 0.890196 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1023.29
+margin_top = 0.015625
+margin_right = 1023.29
+margin_bottom = 0.015625
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="BG/Control2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background5" type="TextureRect" parent="BG/Control2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background3" type="TextureRect" parent="BG/Control2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background2" type="TextureRect" parent="BG/Control2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background4" type="TextureRect" parent="BG/Control2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnCont" type="VBoxContainer" parent="."]
+anchor_bottom = 1.0
+margin_left = 85.7714
+margin_right = 369.771
 custom_constants/separation = 22
 alignment = 1
 __meta__ = {
@@ -31,33 +222,66 @@ __meta__ = {
 }
 
 [node name="OynaBtn" type="Button" parent="BtnCont"]
-margin_top = 165.0
+margin_top = 90.0
 margin_right = 284.0
-margin_bottom = 240.0
-rect_min_size = Vector2( 284, 75 )
+margin_bottom = 215.0
+rect_min_size = Vector2( 284, 125 )
 custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
 text = "Oyna"
 
 [node name="HakkindaBtn" type="Button" parent="BtnCont"]
-margin_top = 262.0
+margin_top = 237.0
 margin_right = 284.0
-margin_bottom = 337.0
-rect_min_size = Vector2( 284, 75 )
+margin_bottom = 362.0
+rect_min_size = Vector2( 284, 125 )
 custom_fonts/font = ExtResource( 3 )
-text = "HakkInda"
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "Hakkinda"
 
 [node name="CikBtn" type="Button" parent="BtnCont"]
-margin_top = 359.0
+margin_top = 384.0
 margin_right = 284.0
-margin_bottom = 434.0
-rect_min_size = Vector2( 284, 75 )
+margin_bottom = 509.0
+rect_min_size = Vector2( 284, 125 )
 custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
 text = "CIk"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Sahnegecisi" parent="CanvasLayer" instance=ExtResource( 2 )]
 visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "arka_plam"
+anims/RESET = SubResource( 1 )
+anims/arka_plam = SubResource( 2 )
+
+[node name="yurume" type="Sprite" parent="."]
+position = Vector2( 646.387, 473.498 )
+scale = Vector2( 7.63147, 7.63147 )
+texture = ExtResource( 10 )
+hframes = 7
+frame = 1
+region_rect = Rect2( 64, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="yurume"]
+autoplay = "walk"
+anims/RESET = SubResource( 3 )
+anims/walk = SubResource( 4 )
 
 [connection signal="pressed" from="BtnCont/OynaBtn" to="." method="_on_OynaBtn_pressed"]
 [connection signal="pressed" from="BtnCont/HakkindaBtn" to="." method="_on_HakkindaBtn_pressed"]
