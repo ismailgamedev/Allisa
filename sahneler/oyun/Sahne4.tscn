@@ -302,11 +302,6 @@ texture = ExtResource( 13 )
 position = Vector2( 862, 15 )
 sonraki_sahne_yolu = "res://sahneler/oyun/Sahne5.tscn"
 
-[node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 8 )]
-position = Vector2( -152.236, 9.96033 )
-gecis_izni = true
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne3.tscn"
-
 [node name="Adam" type="Area2D" parent="seviye"]
 position = Vector2( 472, 85 )
 script = ExtResource( 12 )

@@ -128,12 +128,9 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.1, 6.7, 7.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.1, 8.9 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
-"args": [ false ],
-"method": "hareket_izni"
-}, {
 "args": [ false ],
 "method": "hareket_izni"
 }, {
@@ -391,7 +388,7 @@ position = Vector2( 723.019, -1.00964 )
 shape = SubResource( 1 )
 
 [node name="Alisa" parent="seviye" instance=ExtResource( 6 )]
-position = Vector2( 1101.91, 89.2088 )
+position = Vector2( 145.949, 113.777 )
 
 [node name="Tokad_yeme_anim" type="AnimationPlayer" parent="seviye"]
 autoplay = "tokad_ye"
