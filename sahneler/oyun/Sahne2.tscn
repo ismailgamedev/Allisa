@@ -329,11 +329,6 @@ position = Vector2( -12, 414 )
 position = Vector2( 904, 367 )
 sonraki_sahne_yolu = "res://sahneler/oyun/Sahne3.tscn"
 
-[node name="yeni_seviye_kapisi2" parent="seviye" instance=ExtResource( 9 )]
-position = Vector2( -163, 333 )
-gecis_izni = true
-sonraki_sahne_yolu = "res://sahneler/oyun/Sahne1_5.tscn"
-
 [node name="Cocuk" type="Area2D" parent="seviye"]
 position = Vector2( 654, 470 )
 scale = Vector2( 0.284616, 0.264286 )
@@ -407,7 +402,7 @@ position = Vector2( 482.5, 9 )
 shape = SubResource( 1 )
 
 [node name="zemin3" type="StaticBody2D" parent="seviye/duvarlar"]
-position = Vector2( -89, -2 )
+position = Vector2( 52, -281 )
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="seviye/duvarlar/zemin3"]
