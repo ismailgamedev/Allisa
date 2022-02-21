@@ -17,6 +17,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+sonraki_sahne_yolu = "res://sahneler/oyun/magarajam_son.tscn"
 cizim_node_path = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="."]

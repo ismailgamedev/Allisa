@@ -40,7 +40,7 @@ scale = 0.12
 scale_curve = SubResource( 10 )
 color = Color( 1, 1, 1, 0.215686 )
 
-[node name="UstKat" type="Node"]
+[node name="UstKat" type="Node" groups=["ayisis"]]
 
 [node name="seviye" type="Node2D" parent="."]
 

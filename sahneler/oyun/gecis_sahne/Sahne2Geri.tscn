@@ -13,7 +13,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 641, 30 )
 
-[node name="Sahne32" type="Node"]
+[node name="Sahne32" type="Node" groups=["ayisis"]]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

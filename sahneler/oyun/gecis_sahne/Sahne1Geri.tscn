@@ -21,7 +21,7 @@ extents = Vector2( 40.5, 38 )
 size = 32
 font_data = ExtResource( 8 )
 
-[node name="Sahne1" type="Node"]
+[node name="Sahne1" type="Node" groups=["ayisis"]]
 
 [node name="seviye" type="Node2D" parent="."]
 

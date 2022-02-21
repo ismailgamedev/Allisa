@@ -16,7 +16,7 @@ extents = Vector2( 556.617, 24 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 151, 27.9996 )
 
-[node name="sahne4" type="Node"]
+[node name="sahne4" type="Node" groups=["ayisis"]]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

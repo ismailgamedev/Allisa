@@ -23,7 +23,7 @@ font_data = ExtResource( 8 )
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 61.9472, 69.4549 )
 
-[node name="Sahne1_5" type="Node"]
+[node name="Sahne1_5" type="Node" groups=["ayisis"]]
 
 [node name="seviye" type="Node2D" parent="."]
 
